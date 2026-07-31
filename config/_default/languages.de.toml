@@ -1,0 +1,21 @@
+disabled = false
+locale = "de"
+label = "Deutsch"
+weight = 3
+title = "Algan Ayzit"
+
+[params]
+  displayName = "DE"
+  isoCode = "de"
+  rtl = false
+  dateFormat = "2. January 2006"
+  description = "Algan Ayzit - Persönliche Website & Technische Notizen"
+
+[params.author]
+  name = "Algan Ayzit"
+  headline = "Elektro- und Informationstechnik & Network Engineer"
+  bio = "Fokusiert auf sichere Netzwerkinfrastrukturen, Cloud-Technologien und Automatisierung."
+  links = [
+    { github = "https://github.com/alganayzit" },
+    { linkedin = "https://www.linkedin.com/in/algan-ayzit-472726224" } # Buraya kendi LinkedIn uzantını yazabilirsin
+  ]

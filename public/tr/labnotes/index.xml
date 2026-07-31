@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Laboratuvar Notları on Algan Ayzit</title>
+    <link>http://localhost:1313/tr/labnotes/</link>
+    <description>Recent content in Laboratuvar Notları on Algan Ayzit</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>tr</language>
+    <copyright>© 2026 Algan Ayzit</copyright>
+    <lastBuildDate>Wed, 06 May 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tr/labnotes/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>AAA Framework Nedir? Kurumsal Ağlarda Kimlik ve Erişim Yönetimi</title>
+      <link>http://localhost:1313/tr/labnotes/aaa-framework/</link>
+      <pubDate>Wed, 06 May 2026 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/tr/labnotes/aaa-framework/</guid>
+      <description></description>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:1313/labnotes/aaa-framework/feature.png" />
+    </item>
+    
+  </channel>
+</rss>

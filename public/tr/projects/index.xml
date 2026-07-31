@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Projeler on Algan Ayzit</title>
+    <link>http://localhost:1313/tr/projects/</link>
+    <description>Recent content in Projeler on Algan Ayzit</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>tr</language>
+    <copyright>© 2026 Algan Ayzit</copyright>
+    <lastBuildDate>Thu, 12 Mar 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tr/projects/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Merkezi Ağ İzleme ve Güvenlik Sıkılaştırma</title>
+      <link>http://localhost:1313/tr/projects/network-monitoring/</link>
+      <pubDate>Thu, 12 Mar 2026 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/tr/projects/network-monitoring/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Site-to-Site IPsec VPN Tasarımı ve Uygulaması</title>
+      <link>http://localhost:1313/tr/projects/ipsec-vpn/</link>
+      <pubDate>Fri, 23 Jan 2026 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/tr/projects/ipsec-vpn/</guid>
+      <description></description>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:1313/projects/ipsec-vpn/featured.png" />
+    </item>
+    
+    <item>
+      <title>Kurumsal Ağ Tasarımı ve Simülasyonu</title>
+      <link>http://localhost:1313/tr/projects/enterprise-network/</link>
+      <pubDate>Sun, 18 Jan 2026 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/tr/projects/enterprise-network/</guid>
+      <description></description>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:1313/projects/enterprise-network/featured.png" />
+    </item>
+    
+  </channel>
+</rss>

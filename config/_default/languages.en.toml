@@ -1,0 +1,22 @@
+disabled = false
+locale = "en"
+label = "English"
+weight = 1
+title = "Algan Ayzit"
+
+[params]
+  displayName = "EN"
+  isoCode = "en"
+  rtl = false
+  dateFormat = "2 January 2006"
+  description = "Personal website of Algan Ayzit - Engineering, Networks & Security"
+
+[params.author]
+  name = "Algan Ayzit"
+  email = "alganayzit@gmail.com" # Burayı kendi e-postanla değiştirebilirsin
+  headline = "Electrical-Electronics & Network Engineer"
+  bio = "Focused on building secure network infrastructures, cloud technologies, and automation."
+  links = [
+    { github = "https://github.com/alganayzit" },
+    { linkedin = "https://www.linkedin.com/in/algan-ayzit-472726224" } # Buraya kendi LinkedIn uzantını yazabilirsin
+  ]

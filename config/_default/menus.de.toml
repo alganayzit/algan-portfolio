@@ -1,0 +1,14 @@
+[[main]]
+  name = "Über mich"
+  pageRef = "about"
+  weight = 10
+
+  [[main]]
+  name = "Labornotizen"
+  pageRef = "labnotes"
+  weight = 20
+
+[[main]]
+  name = "Projekte"
+  pageRef = "projects"
+  weight = 30

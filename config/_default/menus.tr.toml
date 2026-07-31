@@ -1,0 +1,14 @@
+[[main]]
+  name = "Hakkımda"
+  pageRef = "about"
+  weight = 10
+
+[[main]]
+  name = "Laboratuvar Notları"
+  pageRef = "labnotes"
+  weight = 20
+
+[[main]]
+  name = "Projeler"
+  pageRef = "projects"
+  weight = 30
