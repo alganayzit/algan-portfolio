@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Terraform on Algan Ayzit</title>
+    <link>http://localhost:1313/tr/tags/terraform/</link>
+    <description>Recent content in Terraform on Algan Ayzit</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>tr</language>
+    <copyright>© 2026 Algan Ayzit</copyright>
+    <lastBuildDate>Sat, 01 Aug 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tr/tags/terraform/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Mühendisler İçin Kapsamlı Cloud Computing 101 Rehberi</title>
+      <link>http://localhost:1313/tr/labnotes/cloud-computing/</link>
+      <pubDate>Sat, 01 Aug 2026 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/tr/labnotes/cloud-computing/</guid>
+      <description>Geleneksel veri merkezlerinden modern bulut mimarilerine derinlemesine geçiş. Mimari bileşenler, yazılım tanımlı ağ (SDN), VPC tasarımı, güvenlik ve Infrastructure as Code (IaC) prensipleri.</description>
+      
+    </item>
+    
+  </channel>
+</rss>

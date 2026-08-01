@@ -1,0 +1,1264 @@
+<!doctype html>
+<html
+  lang="tr"
+  dir="ltr"
+  class="scroll-smooth"
+  data-default-appearance="light"
+  data-auto-appearance="true"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+  
+    <meta http-equiv="content-language" content="tr">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color">
+
+  
+  
+    <title>Mühendisler İçin Kapsamlı Cloud Computing 101 Rehberi &middot; Algan Ayzit</title>
+    <meta name="title" content="Mühendisler İçin Kapsamlı Cloud Computing 101 Rehberi &middot; Algan Ayzit">
+  
+
+  
+  
+  
+  
+  
+    
+  
+    
+  
+    
+  
+  
+    <meta name="description" content="Geleneksel veri merkezlerinden modern bulut mimarilerine derinlemesine geçiş. Mimari bileşenler, yazılım tanımlı ağ (SDN), VPC tasarımı, güvenlik ve Infrastructure as Code (IaC) prensipleri.">
+  
+  
+    <meta name="keywords" content="Cloud,AWS,Networking,DevOps,Infrastructure,Terraform,Security,">
+  
+  
+  
+  <link rel="canonical" href="http://localhost:1313/tr/labnotes/cloud-computing/">
+  
+    
+      
+      
+        <link rel="alternate" hreflang="en" href="http://localhost:1313/labnotes/cloud-computing/">
+      
+    
+      
+      
+        <link rel="alternate" hreflang="tr" href="http://localhost:1313/tr/labnotes/cloud-computing/">
+      
+    
+      
+      
+        <link rel="alternate" hreflang="de" href="http://localhost:1313/de/labnotes/cloud-computing/">
+      
+    
+  
+  
+
+  
+  
+    <meta name="author" content="Algan Ayzit">
+  
+  
+    
+      
+        
+          <link href="https://github.com/alganayzit" rel="me">
+        
+      
+    
+      
+        
+          <link href="https://www.linkedin.com/in/algan-ayzit-472726224" rel="me">
+        
+      
+    
+  
+
+  
+  <meta property="og:url" content="http://localhost:1313/tr/labnotes/cloud-computing/">
+	<meta property="og:site_name" content="Algan Ayzit">
+	<meta property="og:title" content="Mühendisler İçin Kapsamlı Cloud Computing 101 Rehberi">
+	<meta property="og:description" content="Geleneksel veri merkezlerinden modern bulut mimarilerine derinlemesine geçiş. Mimari bileşenler, yazılım tanımlı ağ (SDN), VPC tasarımı, güvenlik ve Infrastructure as Code (IaC) prensipleri.">
+	<meta property="og:locale" content="tr">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="labnotes">
+		<meta property="article:published_time" content="2026-08-01T00:00:00+00:00">
+		<meta property="article:modified_time" content="2026-08-01T00:00:00+00:00">
+		<meta property="article:tag" content="Cloud">
+		<meta property="article:tag" content="AWS">
+		<meta property="article:tag" content="Networking">
+		<meta property="article:tag" content="DevOps">
+		<meta property="article:tag" content="Infrastructure">
+		<meta property="article:tag" content="Terraform">
+		<meta property="og:image" content="http://localhost:1313/labnotes/cloud-computing/feature.png">
+
+  
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:image" content="http://localhost:1313/labnotes/cloud-computing/feature.png">
+	<meta name="twitter:title" content="Mühendisler İçin Kapsamlı Cloud Computing 101 Rehberi">
+	<meta name="twitter:description" content="Geleneksel veri merkezlerinden modern bulut mimarilerine derinlemesine geçiş. Mimari bileşenler, yazılım tanımlı ağ (SDN), VPC tasarımı, güvenlik ve Infrastructure as Code (IaC) prensipleri.">
+
+  
+  
+  
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+  
+    
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+    
+  
+  
+  <link
+    type="text/css"
+    rel="stylesheet"
+    href="/css/main.bundle.min.d8968b5074e51f1df2a14d9e8ab8071f02e54104fdf2df960e0484275b9fe02a27f22b633a79d5a05580f363a0119fb7304eb8d4c358fb0a6760875471fafd61.css"
+    integrity="sha512-2JaLUHTlHx3yoU2eirgHHwLlQQT98t&#43;WDgSEJ1uf4Con8itjOnnVoFWA82OgEZ&#43;3ME641MNY&#43;wpnYIdUcfr9YQ==">
+
+  
+  
+  <script
+    type="text/javascript"
+    src="/js/appearance.min.6f41174b3a05b680820fe08cadbfa5fb7a7ca347b76a0955cdc68b9d8aca1ce24f0547e138cea33bcc7904d551a90afcb1cc7f2d9fe8557075d501419046c08c.js"
+    integrity="sha512-b0EXSzoFtoCCD&#43;CMrb&#43;l&#43;3p8o0e3aglVzcaLnYrKHOJPBUfhOM6jO8x5BNVRqQr8scx/LZ/oVXB11QFBkEbAjA=="></script>
+  
+  
+  
+  
+  
+  
+    
+    <script src="/lib/zoom/zoom.min.umd.a527109b68c082a70f3697716dd72a9d5aa8b545cf800cecbbc7399f2ca6f6e0ce3e431f2062b48bbfa47c9ea42822714060bef309be073f49b9c0e30d318d7b.js" integrity="sha512-pScQm2jAgqcPNpdxbdcqnVqotUXPgAzsu8c5nyym9uDOPkMfIGK0i7&#43;kfJ6kKCJxQGC&#43;8wm&#43;Bz9JucDjDTGNew=="></script>
+  
+
+  
+  
+  
+    
+  
+  
+    
+    
+    
+  
+  
+  
+  
+  
+  
+  
+    
+    <script
+      defer
+      type="text/javascript"
+      id="script-bundle"
+      src="/js/main.bundle.min.2e4a40a56a1c26644ff4dab6790eabc19d06af6171ea5b7ce1d008ad294537fedc437e8d1b2d28ae15b50ecb35defd0e442ddca3a21cb41b95435b3f03fd29fd.js"
+      integrity="sha512-LkpApWocJmRP9Nq2eQ6rwZ0Gr2Fx6lt84dAIrSlFN/7cQ36NGy0orhW1Dss13v0ORC3co6IctBuVQ1s/A/0p/Q=="
+      data-copy="Kopyala"
+      data-copied="Kopyalandı"></script>
+  
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+  
+
+  
+  <script type="application/ld+json">
+  [{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "articleSection": "Laboratuvar Notları",
+    "name": "Mühendisler İçin Kapsamlı Cloud Computing 101 Rehberi",
+    "headline": "Mühendisler İçin Kapsamlı Cloud Computing 101 Rehberi",
+    
+    "inLanguage": "tr",
+    "url" : "http://localhost:1313/tr/labnotes/cloud-computing/",
+    "author" : {
+      "@type": "Person",
+      "name": "Algan Ayzit"
+    },
+    "copyrightYear": "2026",
+    "dateCreated": "2026-08-01T00:00:00\u002b00:00",
+    "datePublished": "2026-08-01T00:00:00\u002b00:00",
+    
+    "dateModified": "2026-08-01T00:00:00\u002b00:00",
+    
+    "keywords": ["Cloud","AWS","Networking","DevOps","Infrastructure","Terraform","Security"],
+    
+    "mainEntityOfPage": "true",
+    "wordCount": "1325"
+  }]
+  </script>
+
+
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+</head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <body class="flex flex-col h-screen m-auto leading-7 max-w-7xl px-6 sm:px-14 md:px-24 lg:px-32 text-lg bg-neutral text-neutral-900 dark:bg-neutral-800 dark:text-neutral bf-scrollbar">
+    <div id="the-top" class="absolute flex self-center">
+      <a
+        class="px-3 py-1 text-sm -translate-y-8 rounded-b-lg bg-primary-200 focus:translate-y-0 dark:bg-neutral-600"
+        href="#main-content">
+        <span class="font-bold text-primary-600 pe-2 dark:text-primary-400">&darr;</span>
+        Ana içeriğe geç
+      </a>
+    </div>
+    
+    
+      <div class="main-menu flex items-center w-full gap-2 p-1 pl-0">
+  
+  
+    <a href="/tr/" class="text-base font-medium truncate min-w-0 shrink">
+      Algan Ayzit
+    </a>
+  
+  <div class="flex items-center ms-auto">
+    <div class="hidden md:flex">
+      <nav class="flex items-center gap-x-5 h-12">
+  
+    
+      
+  
+    <a
+      href="/tr/about/"
+      
+      class="flex items-center bf-icon-color-hover"
+      aria-label="Hakkımda"
+      title="">
+      
+      
+        <span class="text-base font-medium break-normal">
+          Hakkımda
+        </span>
+      
+    </a>
+  
+
+    
+      
+  
+    <a
+      href="/tr/labnotes/"
+      
+      class="flex items-center bf-icon-color-hover"
+      aria-label="Laboratuvar Notları"
+      title="Laboratuvar Notları">
+      
+      
+        <span class="text-base font-medium break-normal">
+          Laboratuvar Notları
+        </span>
+      
+    </a>
+  
+
+    
+      
+  
+    <a
+      href="/tr/projects/"
+      
+      class="flex items-center bf-icon-color-hover"
+      aria-label="Projeler"
+      title="Projeler">
+      
+      
+        <span class="text-base font-medium break-normal">
+          Projeler
+        </span>
+      
+    </a>
+  
+
+    
+  
+
+  
+  <div class="translation nested-menu">
+    <button class="cursor-pointer flex items-center">
+      <span class="me-1">
+        <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+    <path fill="currentColor" d="M0 128C0 92.7 28.7 64 64 64H256h48 16H576c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H320 304 256 64c-35.3 0-64-28.7-64-64V128zm320 0V384H576V128H320zM178.3 175.9c-3.2-7.2-10.4-11.9-18.3-11.9s-15.1 4.7-18.3 11.9l-64 144c-4.5 10.1 .1 21.9 10.2 26.4s21.9-.1 26.4-10.2l8.9-20.1h73.6l8.9 20.1c4.5 10.1 16.3 14.6 26.4 10.2s14.6-16.3 10.2-26.4l-64-144zM160 233.2L179 276H141l19-42.8zM448 164c11 0 20 9 20 20v4h44 16c11 0 20 9 20 20s-9 20-20 20h-2l-1.6 4.5c-8.9 24.4-22.4 46.6-39.6 65.4c.9 .6 1.8 1.1 2.7 1.6l18.9 11.3c9.5 5.7 12.5 18 6.9 27.4s-18 12.5-27.4 6.9l-18.9-11.3c-4.5-2.7-8.8-5.5-13.1-8.5c-10.6 7.5-21.9 14-34 19.4l-3.6 1.6c-10.1 4.5-21.9-.1-26.4-10.2s.1-21.9 10.2-26.4l3.6-1.6c6.4-2.9 12.6-6.1 18.5-9.8l-12.2-12.2c-7.8-7.8-7.8-20.5 0-28.3s20.5-7.8 28.3 0l14.6 14.6 .5 .5c12.4-13.1 22.5-28.3 29.8-45H448 376c-11 0-20-9-20-20s9-20 20-20h52v-4c0-11 9-20 20-20z"/></svg></span>
+      </span>
+      <span class="text-sm font-medium bf-icon-color-hover" title="Mühendisler İçin Kapsamlı Cloud Computing 101 Rehberi">TR</span>
+    </button>
+    <ul class="menuhide">
+      <li class="rounded-xl backdrop-blur shadow-2xl p-2 flex flex-col gap-1">
+        
+          <a href="/labnotes/cloud-computing/" class="flex items-center bf-icon-color-hover px-3 py-1">
+            <span class="text-sm font-sm" title="A Comprehensive Cloud Computing 101 Guide for Engineers">
+              EN
+            </span>
+          </a>
+        
+          <a href="/tr/labnotes/cloud-computing/" class="flex items-center bf-icon-color-hover px-3 py-1">
+            <span class="text-sm font-sm" title="Mühendisler İçin Kapsamlı Cloud Computing 101 Rehberi">
+              TR
+            </span>
+          </a>
+        
+          <a href="/de/labnotes/cloud-computing/" class="flex items-center bf-icon-color-hover px-3 py-1">
+            <span class="text-sm font-sm" title="Ein umfassender Cloud-Computing-101-Leitfaden für Ingenieure">
+              DE
+            </span>
+          </a>
+        
+      </li>
+    </ul>
+  </div>
+
+
+  
+
+  
+    <button
+      id="search-button"
+      aria-label="Search"
+      class="text-base bf-icon-color-hover"
+      title="Ara (/)">
+      <span class="relative block icon"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+</span>
+    </button>
+  
+
+  
+    <div class="flex items-center">
+      <button
+        id="appearance-switcher"
+        aria-label="Dark mode switcher"
+        type="button"
+        class="text-base bf-icon-color-hover">
+        <div class="flex items-center justify-center dark:hidden">
+          <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M32 256c0-123.8 100.3-224 223.8-224c11.36 0 29.7 1.668 40.9 3.746c9.616 1.777 11.75 14.63 3.279 19.44C245 86.5 211.2 144.6 211.2 207.8c0 109.7 99.71 193 208.3 172.3c9.561-1.805 16.28 9.324 10.11 16.95C387.9 448.6 324.8 480 255.8 480C132.1 480 32 379.6 32 256z"/></svg>
+</span>
+        </div>
+        <div class="items-center justify-center hidden dark:flex">
+          <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 159.1c-53.02 0-95.1 42.98-95.1 95.1S202.1 351.1 256 351.1s95.1-42.98 95.1-95.1S309 159.1 256 159.1zM509.3 347L446.1 255.1l63.15-91.01c6.332-9.125 1.104-21.74-9.826-23.72l-109-19.7l-19.7-109c-1.975-10.93-14.59-16.16-23.72-9.824L256 65.89L164.1 2.736c-9.125-6.332-21.74-1.107-23.72 9.824L121.6 121.6L12.56 141.3C1.633 143.2-3.596 155.9 2.736 164.1L65.89 256l-63.15 91.01c-6.332 9.125-1.105 21.74 9.824 23.72l109 19.7l19.7 109c1.975 10.93 14.59 16.16 23.72 9.824L256 446.1l91.01 63.15c9.127 6.334 21.75 1.107 23.72-9.822l19.7-109l109-19.7C510.4 368.8 515.6 356.1 509.3 347zM256 383.1c-70.69 0-127.1-57.31-127.1-127.1c0-70.69 57.31-127.1 127.1-127.1s127.1 57.3 127.1 127.1C383.1 326.7 326.7 383.1 256 383.1z"/></svg>
+</span>
+        </div>
+      </button>
+    </div>
+  
+</nav>
+
+
+
+    </div>
+    <div class="flex md:hidden">
+      <div class="flex items-center h-14 gap-4">
+  
+    <button
+      id="search-button-mobile"
+      aria-label="Search"
+      class="flex items-center justify-center bf-icon-color-hover"
+      title="Ara (/)">
+      <span class="relative block icon"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+</span>
+    </button>
+  
+
+  
+    <button
+      id="appearance-switcher-mobile"
+      type="button"
+      aria-label="Dark mode switcher"
+      class="flex items-center justify-center text-neutral-900 hover:text-primary-600 dark:text-neutral-200 dark:hover:text-primary-400">
+      <div class="dark:hidden">
+        <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M32 256c0-123.8 100.3-224 223.8-224c11.36 0 29.7 1.668 40.9 3.746c9.616 1.777 11.75 14.63 3.279 19.44C245 86.5 211.2 144.6 211.2 207.8c0 109.7 99.71 193 208.3 172.3c9.561-1.805 16.28 9.324 10.11 16.95C387.9 448.6 324.8 480 255.8 480C132.1 480 32 379.6 32 256z"/></svg>
+</span>
+      </div>
+      <div class="hidden dark:block">
+        <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 159.1c-53.02 0-95.1 42.98-95.1 95.1S202.1 351.1 256 351.1s95.1-42.98 95.1-95.1S309 159.1 256 159.1zM509.3 347L446.1 255.1l63.15-91.01c6.332-9.125 1.104-21.74-9.826-23.72l-109-19.7l-19.7-109c-1.975-10.93-14.59-16.16-23.72-9.824L256 65.89L164.1 2.736c-9.125-6.332-21.74-1.107-23.72 9.824L121.6 121.6L12.56 141.3C1.633 143.2-3.596 155.9 2.736 164.1L65.89 256l-63.15 91.01c-6.332 9.125-1.105 21.74 9.824 23.72l109 19.7l19.7 109c1.975 10.93 14.59 16.16 23.72 9.824L256 446.1l91.01 63.15c9.127 6.334 21.75 1.107 23.72-9.822l19.7-109l109-19.7C510.4 368.8 515.6 356.1 509.3 347zM256 383.1c-70.69 0-127.1-57.31-127.1-127.1c0-70.69 57.31-127.1 127.1-127.1s127.1 57.3 127.1 127.1C383.1 326.7 326.7 383.1 256 383.1z"/></svg>
+</span>
+      </div>
+    </button>
+  
+
+  
+    <input type="checkbox" id="mobile-menu-toggle" autocomplete="off" class="hidden peer">
+    <label for="mobile-menu-toggle" class="flex items-center justify-center cursor-pointer bf-icon-color-hover">
+      <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M0 96C0 78.33 14.33 64 32 64H416C433.7 64 448 78.33 448 96C448 113.7 433.7 128 416 128H32C14.33 128 0 113.7 0 96zM0 256C0 238.3 14.33 224 32 224H416C433.7 224 448 238.3 448 256C448 273.7 433.7 288 416 288H32C14.33 288 0 273.7 0 256zM416 448H32C14.33 448 0 433.7 0 416C0 398.3 14.33 384 32 384H416C433.7 384 448 398.3 448 416C448 433.7 433.7 448 416 448z"/></svg>
+</span>
+    </label>
+
+    <div
+      role="dialog"
+      aria-modal="true"
+      style="scrollbar-gutter: stable;"
+      class="fixed inset-0 z-50 invisible overflow-y-auto px-6 py-20 opacity-0 transition-[opacity,visibility] duration-300 peer-checked:visible peer-checked:opacity-100 bg-neutral-50/97 dark:bg-neutral-900/99
+      bf-scrollbar">
+      <label
+        for="mobile-menu-toggle"
+        class="fixed end-8 top-5 flex items-center justify-center z-50 h-12 w-12 cursor-pointer select-none rounded-full bf-icon-color-hover border bf-border-color bf-border-color-hover bg-neutral-50 dark:bg-neutral-900">
+        <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg>
+</span>
+      </label>
+      <nav class="mx-auto max-w-md space-y-6">
+        
+  
+    
+    <div class="px-2">
+      <a
+        href="/tr/about/"
+        aria-label="Hakkımda"
+        
+        class="flex items-center gap-4 group bf-icon-color-hover text-neutral-700 dark:text-neutral-200">
+        
+        <span title="" class="text-2xl font-bold tracking-tight">
+          Hakkımda
+        </span>
+        
+      </a>
+
+      
+    </div>
+  
+    
+    <div class="px-2">
+      <a
+        href="/tr/labnotes/"
+        aria-label="Laboratuvar Notları"
+        
+        class="flex items-center gap-4 group bf-icon-color-hover text-neutral-700 dark:text-neutral-200">
+        
+        <span title="Laboratuvar Notları" class="text-2xl font-bold tracking-tight">
+          Laboratuvar Notları
+        </span>
+        
+      </a>
+
+      
+    </div>
+  
+    
+    <div class="px-2">
+      <a
+        href="/tr/projects/"
+        aria-label="Projeler"
+        
+        class="flex items-center gap-4 group bf-icon-color-hover text-neutral-700 dark:text-neutral-200">
+        
+        <span title="Projeler" class="text-2xl font-bold tracking-tight">
+          Projeler
+        </span>
+        
+      </a>
+
+      
+    </div>
+  
+
+        
+  
+
+        
+  
+    <div
+      class="flex flex-wrap items-center [&_span]:text-2xl [&_.translation_button_.icon]:text-4xl! [&_.translation_button_span]:text-base! [&_.translation_.menuhide_span]:text-sm! gap-x-6 ps-2 mt-8 pt-8 border-t bf-border-color">
+      
+  <div class="translation nested-menu">
+    <button class="cursor-pointer flex items-center">
+      <span class="me-1">
+        <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+    <path fill="currentColor" d="M0 128C0 92.7 28.7 64 64 64H256h48 16H576c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H320 304 256 64c-35.3 0-64-28.7-64-64V128zm320 0V384H576V128H320zM178.3 175.9c-3.2-7.2-10.4-11.9-18.3-11.9s-15.1 4.7-18.3 11.9l-64 144c-4.5 10.1 .1 21.9 10.2 26.4s21.9-.1 26.4-10.2l8.9-20.1h73.6l8.9 20.1c4.5 10.1 16.3 14.6 26.4 10.2s14.6-16.3 10.2-26.4l-64-144zM160 233.2L179 276H141l19-42.8zM448 164c11 0 20 9 20 20v4h44 16c11 0 20 9 20 20s-9 20-20 20h-2l-1.6 4.5c-8.9 24.4-22.4 46.6-39.6 65.4c.9 .6 1.8 1.1 2.7 1.6l18.9 11.3c9.5 5.7 12.5 18 6.9 27.4s-18 12.5-27.4 6.9l-18.9-11.3c-4.5-2.7-8.8-5.5-13.1-8.5c-10.6 7.5-21.9 14-34 19.4l-3.6 1.6c-10.1 4.5-21.9-.1-26.4-10.2s.1-21.9 10.2-26.4l3.6-1.6c6.4-2.9 12.6-6.1 18.5-9.8l-12.2-12.2c-7.8-7.8-7.8-20.5 0-28.3s20.5-7.8 28.3 0l14.6 14.6 .5 .5c12.4-13.1 22.5-28.3 29.8-45H448 376c-11 0-20-9-20-20s9-20 20-20h52v-4c0-11 9-20 20-20z"/></svg></span>
+      </span>
+      <span class="text-sm font-medium bf-icon-color-hover" title="Mühendisler İçin Kapsamlı Cloud Computing 101 Rehberi">TR</span>
+    </button>
+    <ul class="menuhide">
+      <li class="rounded-xl backdrop-blur shadow-2xl p-2 flex flex-col gap-1">
+        
+          <a href="/labnotes/cloud-computing/" class="flex items-center bf-icon-color-hover px-3 py-1">
+            <span class="text-sm font-sm" title="A Comprehensive Cloud Computing 101 Guide for Engineers">
+              EN
+            </span>
+          </a>
+        
+          <a href="/tr/labnotes/cloud-computing/" class="flex items-center bf-icon-color-hover px-3 py-1">
+            <span class="text-sm font-sm" title="Mühendisler İçin Kapsamlı Cloud Computing 101 Rehberi">
+              TR
+            </span>
+          </a>
+        
+          <a href="/de/labnotes/cloud-computing/" class="flex items-center bf-icon-color-hover px-3 py-1">
+            <span class="text-sm font-sm" title="Ein umfassender Cloud-Computing-101-Leitfaden für Ingenieure">
+              DE
+            </span>
+          </a>
+        
+      </li>
+    </ul>
+  </div>
+
+
+
+      
+    </div>
+  
+
+      </nav>
+    </div>
+  
+</div>
+
+
+
+
+
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+    
+    <div class="relative flex flex-col grow">
+      <main id="main-content" class="grow">
+        
+  
+  <article>
+    
+    
+
+    
+    <header id="single_header" class="mt-5 max-w-prose">
+      
+      <h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">
+        Mühendisler İçin Kapsamlı Cloud Computing 101 Rehberi
+      </h1>
+      <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
+        
+
+
+
+
+
+  
+  
+
+
+
+  
+
+  
+  
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <div class="flex flex-row flex-wrap items-center">
+    
+    
+      <time datetime="2026-08-01T00:00:00&#43;00:00">1 Ağustos 2026</time><span class="px-2 text-primary-500">&middot;</span><span>1325 kelime</span><span class="px-2 text-primary-500">&middot;</span><span title="Okuma süresi">7 dk</span>
+    
+
+    
+    
+  </div>
+
+  
+
+  
+  
+
+
+      </div>
+      
+        
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+    
+    
+<div class="flex author">
+  
+  <div class="place-self-center">
+    
+      <div class="text-[0.6rem] uppercase leading-3 text-neutral-500 dark:text-neutral-400">
+        Yazar
+      </div>
+      <div class="font-semibold leading-6 text-neutral-800 dark:text-neutral-300">
+        Algan Ayzit
+      </div>
+    
+    
+      <div class="text-sm text-neutral-700 dark:text-neutral-400">Güvenli ağ altyapıları, bulut bilişim ve otomasyon teknolojileri üzerine çalışıyor.</div>
+    
+    <div class="text-2xl sm:text-lg">
+  <div class="flex flex-wrap text-neutral-400 dark:text-neutral-500 space-x-2">
+    
+      
+        
+        <a
+          class=" hover:text-primary-700 dark:hover:text-primary-400"
+          href="https://github.com/alganayzit"
+          
+          target="_blank"
+          aria-label="Github"
+          title="Github"
+          rel="me noopener noreferrer"
+          ><span class="inline-block align-text-bottom"><span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+</span></span></a
+        >
+      
+    
+      
+        
+        <a
+          class=" hover:text-primary-700 dark:hover:text-primary-400"
+          href="https://www.linkedin.com/in/algan-ayzit-472726224"
+          
+          target="_blank"
+          aria-label="Linkedin"
+          title="Linkedin"
+          rel="me noopener noreferrer"
+          ><span class="inline-block align-text-bottom"><span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+</span></span></a
+        >
+      
+    
+  </div>
+
+</div>
+  </div>
+</div>
+
+  
+
+  
+
+  
+    <div class="mb-5"></div>
+  
+
+      
+    </header>
+
+    
+    <section class="flex flex-col max-w-full mt-0 prose dark:prose-invert lg:flex-row">
+      
+      
+      
+      
+      
+
+
+      <div class="min-w-0 min-h-0 max-w-fit">
+        
+
+        <div class="article-content max-w-prose mb-20">
+          <p><figure><img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="auto"
+    alt="Cloud"
+    width="1200"
+    height="630"
+    src="/labnotes/cloud-computing/feature_hu_9ca5974964a3301b.png"
+    srcset="/labnotes/cloud-computing/feature_hu_9ca5974964a3301b.png 800w, /labnotes/cloud-computing/feature.png 1280w"
+    sizes="(min-width: 768px) 50vw, 65vw"
+    data-zoom-src="/labnotes/cloud-computing/feature.png"></figure>
+
+Günümüz yazılım ve altyapı dünyasında &ldquo;Cloud&rdquo; (Bulut Bilişim) artık sadece popüler bir teknoloji terimi değil; modern bilişim altyapılarının ve kurumsal sistemlerin omurgası haline gelmiş durumda. Ancak Cloud, popüler kültürde genellikle yüzeysel bir şekilde &ldquo;başkalarının bilgisayarlarını kiralama hizmeti&rdquo; olarak tanımlansa da, işin altyapı, ağ (networking) ve mühendislik boyutuna indiğimizde bundan çok daha karmaşık ve güçlü bir mimariyi ifade eder.</p>
+<p>Bu rehberde, geleneksel On-Premise yapılardan modern Cloud mimarilerine geçiş mantığını, hizmet/dağıtım modellerini, bir altyapı mühendisi gözüyle Cloud ağ tasarımını (SDN/VPC), yüksek erişilebilirlik (HA) prensiplerini ve kaçırılmaması gereken güvenlik kurallarını derinlemesine ele alacağız.</p>
+<hr>
+
+<h2 class="relative group">1. On-Premise Dünyasından Cloud&rsquo;a Dönüşüm
+    <div id="1-on-premise-dünyasından-clouda-dönüşüm" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#1-on-premise-d%c3%bcnyas%c4%b1ndan-clouda-d%c3%b6n%c3%bc%c5%9f%c3%bcm" aria-label="Anchor">#</a>
+    </span>
+    
+</h2>
+<p>Geleneksel <strong>On-Premise</strong> (lokal veri merkezi) mimarilerinde bir sistem kurmak; fiziksel sunucu tedariki (procurement), kablolama, iklimlendirme, kesintisiz güç kaynakları (UPS), rack kabinet düzeni ve ağ donanımları (switch, router, firewall) gibi ciddi bir fiziksel operasyon ve süreç yönetimi gerektirir.</p>
+<p>Bu geleneksel yaklaşımın en büyük kısıtları şunlardır:</p>
+<ul>
+<li><strong>CapEx (Capital Expenditure) Yükü:</strong> Yüksek ilk kurulum maliyeti. Henüz bir projenin gerçek trafik yükü ve başarısı belli değilken devasa donanım yatırımları yapılması gerekir.</li>
+<li><strong>Kapasite Planlama Çıkmazı:</strong> Anlık trafik artışlarında sistem yetersiz kalıp çökebilir (<strong>under-provisioning</strong>); veya en yüksek trafik anı düşünülerek yapılan donanım yatırımları, normal günlerde kaynakların %80&rsquo;inin boşta kalmasına neden olur (<strong>over-provisioning</strong>).</li>
+<li><strong>Esneklik (Agility) Eksikliği:</strong> Yeni bir sunucunun sipariş edilmesi, veri merkezine teslimi, montajı ve konfigürasyonu haftalar hatta aylar alabilir.</li>
+</ul>
+<p><strong>Cloud Computing</strong>, donanımı fiziksel bir varlık olmaktan çıkarıp bir <strong>hizmet (utility)</strong> ve <strong>yazılım nesnesi</strong> haline getirir. Tıpkı elektrik veya su şebekesi gibi: İhtiyacın kadar kaynağı anında oluşturur, kullandığın kadar öder (<strong>Pay-as-you-go</strong>), ve işin bittiğinde kaynağı tek bir API çağrısı ile yok edersin.</p>
+<hr>
+
+<h2 class="relative group">2. Cloud Hizmet Modelleri (XaaS)
+    <div id="2-cloud-hizmet-modelleri-xaas" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#2-cloud-hizmet-modelleri-xaas" aria-label="Anchor">#</a>
+    </span>
+    
+</h2>
+<p>Bulut servisleri, kullanıcıya sunulan soyutlama (abstraction) seviyesine ve yönetim sorumluluğuna göre üç ana kategoriye ayrılır:</p>
+<table>
+	<thead>
+			<tr>
+					<th style="text-align: left">Hizmet Modeli</th>
+					<th style="text-align: left">Sizin Sorumluluğunuz</th>
+					<th style="text-align: left">Bulut Sağlayıcısının Sorumluluğu</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: left"><strong>SaaS</strong></td>
+					<td style="text-align: left">Sadece Veri ve Kullanımı</td>
+					<td style="text-align: left">Uygulama, Runtime, OS, Donanım</td>
+			</tr>
+			<tr>
+					<td style="text-align: left"><strong>PaaS</strong></td>
+					<td style="text-align: left">Uygulama ve Veri</td>
+					<td style="text-align: left">Runtime, İşletim Sistemi, Sanallaştırma, Donanım</td>
+			</tr>
+			<tr>
+					<td style="text-align: left"><strong>IaaS</strong></td>
+					<td style="text-align: left">İşletim Sistemi, Uygulama, Ağ Ayarları</td>
+					<td style="text-align: left">Sanallaştırma, Donanım, Veri Merkezi</td>
+			</tr>
+	</tbody>
+</table>
+
+<h3 class="relative group">🏢 IaaS (Infrastructure as a Service)
+    <div id="-iaas-infrastructure-as-a-service" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#-iaas-infrastructure-as-a-service" aria-label="Anchor">#</a>
+    </span>
+    
+</h3>
+<p>Altyapının en temel seviyesidir. Donanım ve sanallaştırma katmanı bulut sağlayıcısı (AWS, Azure, GCP) tarafından yönetilir; sanal sunucu (VM), disk depolama, işletim sistemi seçimi ve detaylı ağ yapılandırması tamamen sizin kontrolünüzdedir.</p>
+<ul>
+<li><strong>Kullanım Senaryosu:</strong> Mevcut On-Premise sistemleri aynen buluta taşımak (Lift-and-Shift) veya tam kontrol gerektiren altyapılar.</li>
+<li><strong>Örnekler:</strong> AWS EC2, Azure VMs, Google Compute Engine.</li>
+</ul>
+
+<h3 class="relative group">🛠️ PaaS (Platform as a Service)
+    <div id="-paas-platform-as-a-service" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#-paas-platform-as-a-service" aria-label="Anchor">#</a>
+    </span>
+    
+</h3>
+<p>İşletim sistemi güncellemeleri, güvenlik yamaları, çalışma zamanı (runtime: Node.js, Python, Java vb.) ve veritabanı motoru yönetimi bulut sağlayıcısına bırakılır. Geliştirici sadece kodunu yazar ve ortama gönderir.</p>
+<ul>
+<li><strong>Kullanım Senaryosu:</strong> Sunucu yönetimiyle vakit kaybetmeden hızlıca ürün/uygulama canlıya almak isteyen yazılım ekipleri.</li>
+<li><strong>Örnekler:</strong> AWS Elastic Beanstalk, Heroku, Google App Engine, Azure App Service.</li>
+</ul>
+
+<h3 class="relative group">📦 SaaS (Software as a Service)
+    <div id="-saas-software-as-a-service" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#-saas-software-as-a-service" aria-label="Anchor">#</a>
+    </span>
+    
+</h3>
+<p>Son kullanıcıya yönelik, web browser veya API üzerinden erişilen, tamamen yönetilen hazır yazılımlardır. Herhangi bir kodlama veya donanım yönetimi gerektirmez.</p>
+<ul>
+<li><strong>Örnekler:</strong> Google Workspace, Microsoft 365, Salesforce, Jira.</li>
+</ul>
+<hr>
+
+<h2 class="relative group">3. Bulut Dağıtım Modelleri (Deployment Models)
+    <div id="3-bulut-dağıtım-modelleri-deployment-models" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#3-bulut-da%c4%9f%c4%b1t%c4%b1m-modelleri-deployment-models" aria-label="Anchor">#</a>
+    </span>
+    
+</h2>
+<ul>
+<li><strong>Public Cloud:</strong> Kaynakların genel internet üzerinden üçüncü taraf sağlayıcılar (AWS, Azure, GCP) tarafından herkese sunulduğu model. Yüksek ölçeklenebilirlik sağlar.</li>
+<li><strong>Private Cloud:</strong> Sadece tek bir kuruma özel, şirket içi veri merkezinde (On-Premise) veya izole edilmiş özel sunucularda çalışan bulut yapısı (OpenStack, VMware Cloud Foundation).</li>
+<li><strong>Hybrid Cloud:</strong> On-Premise altyapı ile Public Cloud&rsquo;un güvenli bir şekilde birbirine bağlanarak hibrit çalıştırıldığı model. Finans, sağlık ve bankacılık gibi hassas veri barındıran ancak Public Cloud&rsquo;un esnekliğinden de yararlanmak isteyen kurumların tercihidir.</li>
+<li><strong>Multi-Cloud:</strong> İki veya daha fazla public cloud sağlayıcısının (örneğin AWS + Google Cloud) aynı anda kullanılarak bağımlılığın (<strong>vendor lock-in</strong>) azaltıldığı ve en iyi servislerin kombine edildiği mimari.</li>
+</ul>
+<hr>
+
+<h2 class="relative group">4. Mühendislik Perspektifi: Cloud ve Software-Defined Networking (SDN)
+    <div id="4-mühendislik-perspektifi-cloud-ve-software-defined-networking-sdn" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#4-m%c3%bchendislik-perspektifi-cloud-ve-software-defined-networking-sdn" aria-label="Anchor">#</a>
+    </span>
+    
+</h2>
+<p>Birçok kişinin düştüğü yanılgı, Cloud&rsquo;un sadece sanal sunuculardan ibaret olduğudur. Gerçekte <strong>sağlam ve izole edilmiş bir ağ tasarımı olmadan hiçbir bulut mimarisi güvenli çalışamaz.</strong> Fiziksel dünyadaki VLAN, subnet, routing table, NAT ve firewall kavramları Cloud ortamında <strong>Software-Defined Networking (SDN)</strong> ile kodlanabilir yapılara dönüşür.</p>
+
+<h3 class="relative group">Virtual Private Cloud (VPC) Tasarımı
+    <div id="virtual-private-cloud-vpc-tasarımı" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#virtual-private-cloud-vpc-tasar%c4%b1m%c4%b1" aria-label="Anchor">#</a>
+    </span>
+    
+</h3>
+<p>VPC, Public Cloud içinde kurumunuza özel tahsis edilmiş, mantıksal olarak izole edilmiş sanal ağ ortamıdır.</p>
+<ol>
+<li>
+<p><strong>Subnet Hiyerarşisi:</strong></p>
+<ul>
+<li><strong>Public Subnet:</strong> Doğrudan Internet Gateway&rsquo;e (IGW) bağlı olan ve dış dünyadan erişim alması gereken bileşenlerin (Load Balancer, Bastion Host vb.) konulduğu ağ bloğu.</li>
+<li><strong>Private Subnet:</strong> Dış internetten doğrudan erişilemeyen, sadece iç ağdan ulaşılan ve internete çıkışını bir NAT Gateway üzerinden yapan blok (Uygulama sunucuları, Microservice&rsquo;ler).</li>
+<li><strong>Database Subnet:</strong> İnternet erişimi tamamen kapalı, sadece Private Subnet&rsquo;ten gelen isteklere cevap veren tam izole blok.</li>
+</ul>
+</li>
+<li>
+<p><strong>Güvenlik Katmanları (Defense in Depth):</strong></p>
+<ul>
+<li><strong>Security Group (SG):</strong> Sanal sunucu (ENI) seviyesinde çalışan, <strong>Stateful</strong> (durum bilgisi tutan) güvenlik duvarı. Gelen trafiğe izin verildiğinde dönüş trafiğine otomatik izin verilir.</li>
+<li><strong>Network ACL (NACL):</strong> Subnet seviyesinde çalışan, <strong>Stateless</strong> (durum bilgisi tutmayan) güvenlik katmanı. Hem Gelen (Inbound) hem Giden (Outbound) kuralların açıkça tanımlanması gerekir.</li>
+</ul>
+</li>
+</ol>
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">[ Internet ]
+</span></span><span class="line"><span class="cl">     ↓
+</span></span><span class="line"><span class="cl">[ Internet Gateway ]
+</span></span><span class="line"><span class="cl">     ↓
+</span></span><span class="line"><span class="cl">[ Public Subnet ]    ──&gt; (Load Balancer / Security Group)
+</span></span><span class="line"><span class="cl">     ↓
+</span></span><span class="line"><span class="cl">[ NAT Gateway ]
+</span></span><span class="line"><span class="cl">     ↓
+</span></span><span class="line"><span class="cl">[ Private Subnet ]   ──&gt; (App Servers / Security Group)
+</span></span><span class="line"><span class="cl">     ↓
+</span></span><span class="line"><span class="cl">[ Database Subnet ]  ──&gt; (Isolated Database Cluster)</span></span></code></pre></div></div>
+
+<h3 class="relative group">On-Premise ile Cloud Bağlantı Yöntemleri
+    <div id="on-premise-ile-cloud-bağlantı-yöntemleri" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#on-premise-ile-cloud-ba%c4%9flant%c4%b1-y%c3%b6ntemleri" aria-label="Anchor">#</a>
+    </span>
+    
+</h3>
+<p>Hibrit mimarilerde lokal veri merkeziniz ile bulut VPC&rsquo;nizi konuşturmak için iki temel yöntem kullanılır:</p>
+<ul>
+<li><strong>Site-to-Site IPsec VPN:</strong> İnternet üzerinden şifreli tünel kurularak yapılan, kurulumu hızlı ve maliyet odaklı bağlantı.</li>
+<li><strong>Dedicated Direct Connection (AWS Direct Connect / Azure ExpressRoute):</strong> Müşteri veri merkezi ile bulut sağlayıcısının PoP noktası arasında interneti tamamen bypass eden, sabit hat hızlı (1Gbps - 100Gbps), düşük gecikmeli (low-latency) fiziksel fiber hat.</li>
+</ul>
+<hr>
+
+<h2 class="relative group">5. Yüksek Erişilebilirlik (High Availability) ve Esneklik (Elasticity)
+    <div id="5-yüksek-erişilebilirlik-high-availability-ve-esneklik-elasticity" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#5-y%c3%bcksek-eri%c5%9filebilirlik-high-availability-ve-esneklik-elasticity" aria-label="Anchor">#</a>
+    </span>
+    
+</h2>
+<p>Cloud mimarisini geleneksel yapılardan ayıran en temel iki mühendislik prensibi şunlardır:</p>
+
+<h3 class="relative group">🔄 Auto Scaling &amp; Elasticity
+    <div id="-auto-scaling--elasticity" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#-auto-scaling--elasticity" aria-label="Anchor">#</a>
+    </span>
+    
+</h3>
+<p>Sistem trafiği arttığında sunucuların işlemci (CPU) veya bellek (RAM) kapasitesini artırmak <strong>Vertical Scaling (Scale Up)</strong> iken; sisteme aynı özelliklerde yeni sunucu örnekleri eklemek <strong>Horizontal Scaling (Scale Out)</strong> olarak adlandırılır.</p>
+<p>Cloud ortamında <strong>Auto Scaling Group (ASG)</strong> yapısı sayesinde, örneğin CPU kullanımı %70&rsquo;i aştığında mimari otomatik olarak yeni EC2/VM örnekleri ayağa kaldırır ve trafik düştüğünde bunları kapatır.</p>
+
+<h3 class="relative group">🌐 Multi-AZ ve Multi-Region Mimarisi
+    <div id="-multi-az-ve-multi-region-mimarisi" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#-multi-az-ve-multi-region-mimarisi" aria-label="Anchor">#</a>
+    </span>
+    
+</h3>
+<ul>
+<li><strong>Availability Zone (AZ):</strong> Bir bölgedeki (Region) birbirinden bağımsız güç, iklimlendirme ve ağ altyapısına sahip fiziksel veri merkezleridir.</li>
+<li><strong>Yüksek Erişilebilirlik (HA):</strong> Bir sunucunun çökmesi durumunda sistemin kesintisiz çalışması için uygulamalar en az 2 farklı AZ&rsquo;ye dağıtılmış subnet&rsquo;lerde çalıştırılır ve önlerine bir <strong>Application Load Balancer (ALB)</strong> koyulur.</li>
+</ul>
+<hr>
+
+<h2 class="relative group">6. Güvenlik ve Paylaşılan Sorumluluk Modeli (Shared Responsibility Model)
+    <div id="6-güvenlik-ve-paylaşılan-sorumluluk-modeli-shared-responsibility-model" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#6-g%c3%bcvenlik-ve-payla%c5%9f%c4%b1lan-sorumluluk-modeli-shared-responsibility-model" aria-label="Anchor">#</a>
+    </span>
+    
+</h2>
+<p>Cloud güvenliğinde yapılan en büyük stratejik hata &ldquo;Her şeyi bulut sağlayıcısına taşıdık, güvenlik artık onların işi&rdquo; yaklaşımıdır. AWS ve Azure gibi devler <strong>Shared Responsibility Model</strong> ilkesiyle çalışır:</p>
+<ul>
+<li><strong>Security OF the Cloud (Bulut Sağlayıcısının Sorumluluğu):</strong> Fiziksel veri merkezlerinin güvenliği, donanım arızaları, hypervisor katmanı, fiziksel ağ kablolaması ve altyapı tesis güvenliği.</li>
+<li><strong>Security IN the Cloud (Müşterinin Sorumluluğu):</strong> Sanal sunucudaki işletim sistemi güncellemeleri, IAM (Identity and Access Management) kullanıcı yetkileri, firewall kuralları, verilerin şifrelenmesi (Encryption at rest &amp; in transit) ve uygulama kodu güvenliği.</li>
+</ul>
+<hr>
+
+<h2 class="relative group">7. Kod Olarak Altyapı (Infrastructure as Code - IaC) ve FinOps
+    <div id="7-kod-olarak-altyapı-infrastructure-as-code---iac-ve-finops" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#7-kod-olarak-altyap%c4%b1-infrastructure-as-code---iac-ve-finops" aria-label="Anchor">#</a>
+    </span>
+    
+</h2>
+<p>Modern Cloud yönetiminde sunucuları veya ağları konsol üzerinden elle tıklayarak oluşturmak (&ldquo;ClickOps&rdquo;) sürdürülebilir değildir ve insan hatasına açıktır.</p>
+
+<h3 class="relative group">Infrastructure as Code (IaC)
+    <div id="infrastructure-as-code-iac" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#infrastructure-as-code-iac" aria-label="Anchor">#</a>
+    </span>
+    
+</h3>
+<p>Altyapının tamamının (VPC, Subnet, EC2, Load Balancer vb.) kod dosyaları ile tanımlanmasıdır.</p>
+<ul>
+<li><strong>Terraform / OpenTofu:</strong> Bildirimsel (declarative) dili ile tüm bulut sağlayıcılarında altyapıyı kodla yönetmeyi sağlar.</li>
+<li><strong>Avantajları:</strong> Versiyon kontrolü (Git ile takip), tekrarlanabilirlik (aynı altyapıyı saniyeler içinde test ortamına kurabilme) ve felaket kurtarma (Disaster Recovery) kolaylığı.</li>
+</ul>
+
+<h3 class="relative group">FinOps ve Maliyet Yönetimi
+    <div id="finops-ve-maliyet-yönetimi" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#finops-ve-maliyet-y%c3%b6netimi" aria-label="Anchor">#</a>
+    </span>
+    
+</h3>
+<p>Cloud esneklik sağlarken, kontrolden çıkan bütçelere de sebep olabilir. <strong>FinOps</strong>, mühendislik ve finans ekiplerinin birlikte çalışarak maliyetleri optimize etmesidir:</p>
+<ul>
+<li>Kullanılmayan boşta duran (idle) kaynakların tespiti ve silinmesi.</li>
+<li>7/24 çalışan kararlı yükler için <strong>Reserved Instances (RI)</strong> veya <strong>Savings Plans</strong> kullanarak %60-70 varan indirimler elde edilmesi.</li>
+<li>Geçici işler için <strong>Spot Instance</strong> kullanımı.</li>
+</ul>
+<hr>
+
+<h2 class="relative group">8. Sonuç ve Gelecek Vizyonu
+    <div id="8-sonuç-ve-gelecek-vizyonu" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#8-sonu%c3%a7-ve-gelecek-vizyonu" aria-label="Anchor">#</a>
+    </span>
+    
+</h2>
+<p>Cloud Computing, altyapı mühendisliğini fiziksel donanım bağımlılığından tamamen kurtarıp <strong>Yazılım Tanımlı Altyapı (SDN &amp; IaC)</strong> dönemine taşımıştır. Günümüzde ağ mühendisliği, sistem yönetimi ve yazılım geliştirme rolleri <strong>DevOps, SRE (Site Reliability Engineering) ve Cloud Engineering</strong> disiplinleri altında birleşmektedir.</p>
+<p>Bu dünyada yer almak isteyen bir mühendis için; ağ prensiplerini (TCP/IP, Routing, DNS), sanallaştırma/konteyner teknolojilerini (Docker, Kubernetes) ve Infrastructure as Code araçlarını (Terraform) Cloud prensipleriyle harmanlamak en kritik adımdır.</p>
+<p>Öğrenim sürecinde teoride kalmayıp pazar payı yüksek olan <strong>AWS</strong> veya <strong>Azure</strong> üzerinde ücretsiz katman (Free Tier) hesapları açarak hands-on projeler üretmek, bu ekosisteme hakim olmanın en kestirme yoludur.</p>
+
+          
+          
+          
+        </div>
+        
+        
+
+        
+
+        
+
+      </div>
+    </section>
+
+    
+    <footer class="pt-8 max-w-prose print:hidden">
+      
+  
+    
+    
+    
+    <div class="pt-8">
+      <hr class="border-dotted border-neutral-300 dark:border-neutral-600">
+      <div class="flex justify-between pt-3">
+        <span class="flex flex-col">
+          
+            <a
+              class="flex text-neutral-700 hover:text-primary-600 dark:text-neutral dark:hover:text-primary-400"
+              href="/tr/labnotes/aaa-framework/">
+              <span class="leading-6">
+                <span class="inline-block rtl:rotate-180">&larr;</span>&ensp;AAA Framework Nedir? Kurumsal Ağlarda Kimlik ve Erişim Yönetimi
+              </span>
+            </a>
+            
+              <span class="ms-6 mt-1 text-xs text-neutral-500 dark:text-neutral-400">
+                <time datetime="2026-05-06T00:00:00&#43;00:00">6 Mayıs 2026</time>
+              </span>
+            
+          
+        </span>
+        <span class="flex flex-col items-end">
+          
+        </span>
+      </div>
+    </div>
+  
+
+
+      
+    </footer>
+  </article>
+
+        
+
+
+  
+
+
+
+
+
+
+<div
+  id="scroll-to-top"
+  class="fixed bottom-6 end-6 z-50 transform translate-y-4 opacity-0 duration-200">
+  <a
+    href="#the-top"
+    class="pointer-events-auto flex h-12 w-12 items-center justify-center rounded-full bg-neutral/50 text-xl text-neutral-700 hover:text-primary-600 dark:bg-neutral-800/50 dark:text-neutral dark:hover:text-primary-400"
+    aria-label="Yukarı çık"
+    title="Yukarı çık">
+    &uarr;
+  </a>
+</div>
+
+      </main><footer id="site-footer" class="py-10 print:hidden">
+  
+  
+    
+  
+  <div class="flex items-center justify-between">
+    
+    
+      <p class="text-sm text-neutral-500 dark:text-neutral-400">
+          &copy;
+          2026
+          Algan Ayzit
+      </p>
+    
+
+    
+    
+      <p class="text-xs text-neutral-500 dark:text-neutral-400">
+        
+        
+        <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500"
+          href="https://gohugo.io/" target="_blank" rel="noopener noreferrer">Hugo</a> &amp; <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500"
+          href="https://blowfish.page/" target="_blank" rel="noopener noreferrer">Blowfish</a> tarafından desteklenmektedir.
+      </p>
+    
+  </div>
+  
+    <script>
+      mediumZoom(document.querySelectorAll("img:not(.nozoom)"), {
+        margin: 24,
+        background: "rgba(0,0,0,0.5)",
+        scrollOffset: 0,
+      });
+    </script>
+  
+  
+  
+</footer>
+<div
+  id="search-wrapper"
+  class="invisible fixed inset-0 flex h-screen w-screen cursor-default flex-col bg-neutral-500/50 p-4 backdrop-blur-sm dark:bg-neutral-900/50 sm:p-6 md:p-[10vh] lg:p-[12vh] z-500"
+  data-url="http://localhost:1313/tr/">
+  <div
+    id="search-modal"
+    class="flex flex-col w-full max-w-3xl min-h-0 mx-auto border rounded-md shadow-lg top-20 border-neutral-200 bg-neutral dark:border-neutral-700 dark:bg-neutral-800">
+    <header class="relative z-10 flex items-center justify-between flex-none px-2">
+      <form class="flex items-center flex-auto min-w-0">
+        <div class="flex items-center justify-center w-8 h-8 text-neutral-400">
+          <span class="relative block icon"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+</span>
+        </div>
+        <input
+          type="search"
+          id="search-query"
+          class="flex flex-auto h-12 mx-1 bg-transparent appearance-none focus:outline-dotted focus:outline-2 focus:outline-transparent"
+          placeholder="Ara"
+          tabindex="0">
+      </form>
+      <button
+        id="close-search-button"
+        class="flex items-center justify-center w-8 h-8 text-neutral-700 hover:text-primary-600 dark:text-neutral dark:hover:text-primary-400"
+        title="Kapat (Esc)">
+        <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg>
+</span>
+      </button>
+    </header>
+    <section class="flex-auto px-2 overflow-auto">
+      <ul id="search-results">
+        
+      </ul>
+    </section>
+  </div>
+</div>
+
+    </div>
+  </body>
+  
+</html>
