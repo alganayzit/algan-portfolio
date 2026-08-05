@@ -16,7 +16,7 @@
       
       <guid>http://localhost:1313/tr/labnotes/cloud-computing/</guid>
       <description>Geleneksel veri merkezlerinden modern bulut mimarilerine derinlemesine geçiş. Mimari bileşenler, yazılım tanımlı ağ (SDN), VPC tasarımı, güvenlik ve Infrastructure as Code (IaC) prensipleri.</description>
-      
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:1313/labnotes/cloud-computing/feature.png" />
     </item>
     
   </channel>

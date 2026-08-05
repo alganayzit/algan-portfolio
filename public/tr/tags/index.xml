@@ -7,7 +7,77 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>tr</language>
     <copyright>© 2026 Algan Ayzit</copyright>
-    <lastBuildDate>Sat, 01 Aug 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tr/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 05 Aug 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tr/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>L2</title>
+      <link>http://localhost:1313/tr/tags/l2/</link>
+      <pubDate>Wed, 05 Aug 2026 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/tr/tags/l2/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>L3</title>
+      <link>http://localhost:1313/tr/tags/l3/</link>
+      <pubDate>Wed, 05 Aug 2026 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/tr/tags/l3/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Networking</title>
+      <link>http://localhost:1313/tr/tags/networking/</link>
+      <pubDate>Wed, 05 Aug 2026 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/tr/tags/networking/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Routing</title>
+      <link>http://localhost:1313/tr/tags/routing/</link>
+      <pubDate>Wed, 05 Aug 2026 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/tr/tags/routing/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Security</title>
+      <link>http://localhost:1313/tr/tags/security/</link>
+      <pubDate>Wed, 05 Aug 2026 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/tr/tags/security/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Switching</title>
+      <link>http://localhost:1313/tr/tags/switching/</link>
+      <pubDate>Wed, 05 Aug 2026 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/tr/tags/switching/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>VLAN</title>
+      <link>http://localhost:1313/tr/tags/vlan/</link>
+      <pubDate>Wed, 05 Aug 2026 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/tr/tags/vlan/</guid>
+      <description></description>
+      
+    </item>
     
     <item>
       <title>AWS</title>
@@ -50,11 +120,11 @@
     </item>
     
     <item>
-      <title>Networking</title>
-      <link>http://localhost:1313/tr/tags/networking/</link>
+      <title>Terraform</title>
+      <link>http://localhost:1313/tr/tags/terraform/</link>
       <pubDate>Sat, 01 Aug 2026 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/tr/tags/networking/</guid>
+      <guid>http://localhost:1313/tr/tags/terraform/</guid>
       <description></description>
       
     </item>

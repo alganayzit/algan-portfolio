@@ -16,7 +16,7 @@
       
       <guid>http://localhost:1313/de/labnotes/cloud-computing/</guid>
       <description>Ein tiefgehender Blick auf den Wandel von traditionellen Rechenzentren zu modernen Cloud-Architekturen. Architekturkomponenten, Software-Defined Networking (SDN), VPC-Design, Sicherheit und die Prinzipien von Infrastructure as Code (IaC).</description>
-      
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:1313/labnotes/cloud-computing/feature.png" />
     </item>
     
   </channel>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Networking on Algan Ayzit</title>
+    <link>http://localhost:1313/de/categories/networking/</link>
+    <description>Recent content in Networking on Algan Ayzit</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>de</language>
+    <copyright>© 2026 Algan Ayzit</copyright>
+    <lastBuildDate>Wed, 05 Aug 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/de/categories/networking/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Layer 2 vs. Layer 3 Switching: Die technische Logik hinter Netzwerksegmentierung und Paketfluss</title>
+      <link>http://localhost:1313/de/labnotes/l2-l3/l2-l3/</link>
+      <pubDate>Wed, 05 Aug 2026 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/de/labnotes/l2-l3/l2-l3/</guid>
+      <description>Die hardwareseitigen und logischen Grenzen eines flachen Layer-2-Netzwerks, die Funktionsweise von Layer-3-Switching (L3 Switching) und die Transformation, die ein Paket beim Übergang zwischen den beiden Schichten durchläuft – aus technischer Perspektive.</description>
+      
+    </item>
+    
+  </channel>
+</rss>

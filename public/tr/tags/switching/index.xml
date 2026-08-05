@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Switching on Algan Ayzit</title>
+    <link>http://localhost:1313/tr/tags/switching/</link>
+    <description>Recent content in Switching on Algan Ayzit</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>tr</language>
+    <copyright>© 2026 Algan Ayzit</copyright>
+    <lastBuildDate>Wed, 05 Aug 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tr/tags/switching/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Katman 2 vs. Katman 3 Anahtarlama: Ağ Segmentasyonu ve Paket Akışının Mühendislik Mantığı</title>
+      <link>http://localhost:1313/tr/labnotes/l2-l3/l2-l3/</link>
+      <pubDate>Wed, 05 Aug 2026 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/tr/labnotes/l2-l3/l2-l3/</guid>
+      <description>Düz bir Katman 2 ağının donanımsal ve mantıksal limitleri, Katman 3 anahtarlamanın (L3 Switching) nasıl çalıştığı ve bir paketin iki katman arasında geçerken yaşadığı dönüşüm, mühendislik perspektifinden.</description>
+      
+    </item>
+    
+  </channel>
+</rss>

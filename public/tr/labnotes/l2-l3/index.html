@@ -1,0 +1,1060 @@
+<!doctype html>
+<html
+  lang="tr"
+  dir="ltr"
+  class="scroll-smooth"
+  data-default-appearance="light"
+  data-auto-appearance="true"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+  
+    <meta http-equiv="content-language" content="tr">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color">
+
+  
+  
+    <title>Katman 2 vs. Katman 3 Anahtarlama: Ağ Segmentasyonu ve Paket Akışının Mühendislik Mantığı &middot; Algan Ayzit</title>
+    <meta name="title" content="Katman 2 vs. Katman 3 Anahtarlama: Ağ Segmentasyonu ve Paket Akışının Mühendislik Mantığı &middot; Algan Ayzit">
+  
+
+  
+  
+  
+  
+  
+    
+  
+    
+  
+    
+  
+  
+    <meta name="description" content="Düz bir Katman 2 ağının donanımsal ve mantıksal limitleri, Katman 3 anahtarlamanın (L3 Switching) nasıl çalıştığı ve bir paketin iki katman arasında geçerken yaşadığı dönüşüm, mühendislik perspektifinden.">
+  
+  
+    <meta name="keywords" content="Networking,L2,L3,VLAN,Routing,Switching,Security,">
+  
+  
+  
+  <link rel="canonical" href="http://localhost:1313/tr/labnotes/l2-l3/">
+  
+    
+      
+      
+        <link rel="alternate" hreflang="en" href="http://localhost:1313/labnotes/l2-l3/">
+      
+    
+      
+      
+        <link rel="alternate" hreflang="tr" href="http://localhost:1313/tr/labnotes/l2-l3/">
+      
+    
+      
+      
+        <link rel="alternate" hreflang="de" href="http://localhost:1313/de/labnotes/l2-l3/">
+      
+    
+  
+  
+
+  
+  
+    <meta name="author" content="Algan Ayzit">
+  
+  
+    
+      
+        
+          <link href="https://github.com/alganayzit" rel="me">
+        
+      
+    
+      
+        
+          <link href="https://www.linkedin.com/in/algan-ayzit-472726224" rel="me">
+        
+      
+    
+  
+
+  
+  <meta property="og:url" content="http://localhost:1313/tr/labnotes/l2-l3/">
+	<meta property="og:site_name" content="Algan Ayzit">
+	<meta property="og:title" content="Katman 2 vs. Katman 3 Anahtarlama: Ağ Segmentasyonu ve Paket Akışının Mühendislik Mantığı">
+	<meta property="og:description" content="Düz bir Katman 2 ağının donanımsal ve mantıksal limitleri, Katman 3 anahtarlamanın (L3 Switching) nasıl çalıştığı ve bir paketin iki katman arasında geçerken yaşadığı dönüşüm, mühendislik perspektifinden.">
+	<meta property="og:locale" content="tr">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="labnotes">
+		<meta property="article:published_time" content="2026-08-05T00:00:00+00:00">
+		<meta property="article:modified_time" content="2026-08-05T00:00:00+00:00">
+		<meta property="article:tag" content="Networking">
+		<meta property="article:tag" content="L2">
+		<meta property="article:tag" content="L3">
+		<meta property="article:tag" content="VLAN">
+		<meta property="article:tag" content="Routing">
+		<meta property="article:tag" content="Switching">
+		<meta property="og:image" content="http://localhost:1313/labnotes/l2-l3/feature.png">
+
+  
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:image" content="http://localhost:1313/labnotes/l2-l3/feature.png">
+	<meta name="twitter:title" content="Katman 2 vs. Katman 3 Anahtarlama: Ağ Segmentasyonu ve Paket Akışının Mühendislik Mantığı">
+	<meta name="twitter:description" content="Düz bir Katman 2 ağının donanımsal ve mantıksal limitleri, Katman 3 anahtarlamanın (L3 Switching) nasıl çalıştığı ve bir paketin iki katman arasında geçerken yaşadığı dönüşüm, mühendislik perspektifinden.">
+
+  
+  
+  
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+  
+    
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+    
+  
+  
+  <link
+    type="text/css"
+    rel="stylesheet"
+    href="/css/main.bundle.min.d8968b5074e51f1df2a14d9e8ab8071f02e54104fdf2df960e0484275b9fe02a27f22b633a79d5a05580f363a0119fb7304eb8d4c358fb0a6760875471fafd61.css"
+    integrity="sha512-2JaLUHTlHx3yoU2eirgHHwLlQQT98t&#43;WDgSEJ1uf4Con8itjOnnVoFWA82OgEZ&#43;3ME641MNY&#43;wpnYIdUcfr9YQ==">
+
+  
+  
+  <script
+    type="text/javascript"
+    src="/js/appearance.min.6f41174b3a05b680820fe08cadbfa5fb7a7ca347b76a0955cdc68b9d8aca1ce24f0547e138cea33bcc7904d551a90afcb1cc7f2d9fe8557075d501419046c08c.js"
+    integrity="sha512-b0EXSzoFtoCCD&#43;CMrb&#43;l&#43;3p8o0e3aglVzcaLnYrKHOJPBUfhOM6jO8x5BNVRqQr8scx/LZ/oVXB11QFBkEbAjA=="></script>
+  
+  
+  
+  
+  
+  
+    
+    <script src="/lib/zoom/zoom.min.umd.a527109b68c082a70f3697716dd72a9d5aa8b545cf800cecbbc7399f2ca6f6e0ce3e431f2062b48bbfa47c9ea42822714060bef309be073f49b9c0e30d318d7b.js" integrity="sha512-pScQm2jAgqcPNpdxbdcqnVqotUXPgAzsu8c5nyym9uDOPkMfIGK0i7&#43;kfJ6kKCJxQGC&#43;8wm&#43;Bz9JucDjDTGNew=="></script>
+  
+
+  
+  
+  
+    
+  
+  
+    
+    
+    
+  
+  
+  
+  
+  
+  
+  
+    
+    <script
+      defer
+      type="text/javascript"
+      id="script-bundle"
+      src="/js/main.bundle.min.2e4a40a56a1c26644ff4dab6790eabc19d06af6171ea5b7ce1d008ad294537fedc437e8d1b2d28ae15b50ecb35defd0e442ddca3a21cb41b95435b3f03fd29fd.js"
+      integrity="sha512-LkpApWocJmRP9Nq2eQ6rwZ0Gr2Fx6lt84dAIrSlFN/7cQ36NGy0orhW1Dss13v0ORC3co6IctBuVQ1s/A/0p/Q=="
+      data-copy="Kopyala"
+      data-copied="Kopyalandı"></script>
+  
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+  
+
+  
+  <script type="application/ld+json">
+  [{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "articleSection": "Laboratuvar Notları",
+    "name": "Katman 2 vs. Katman 3 Anahtarlama: Ağ Segmentasyonu ve Paket Akışının Mühendislik Mantığı",
+    "headline": "Katman 2 vs. Katman 3 Anahtarlama: Ağ Segmentasyonu ve Paket Akışının Mühendislik Mantığı",
+    
+    "inLanguage": "tr",
+    "url" : "http://localhost:1313/tr/labnotes/l2-l3/",
+    "author" : {
+      "@type": "Person",
+      "name": "Algan Ayzit"
+    },
+    "copyrightYear": "2026",
+    "dateCreated": "2026-08-05T00:00:00\u002b00:00",
+    "datePublished": "2026-08-05T00:00:00\u002b00:00",
+    
+    "dateModified": "2026-08-05T00:00:00\u002b00:00",
+    
+    "keywords": ["Networking","L2","L3","VLAN","Routing","Switching","Security"],
+    
+    "mainEntityOfPage": "true",
+    "wordCount": "750"
+  }]
+  </script>
+
+
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+</head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <body class="flex flex-col h-screen m-auto leading-7 max-w-7xl px-6 sm:px-14 md:px-24 lg:px-32 text-lg bg-neutral text-neutral-900 dark:bg-neutral-800 dark:text-neutral bf-scrollbar">
+    <div id="the-top" class="absolute flex self-center">
+      <a
+        class="px-3 py-1 text-sm -translate-y-8 rounded-b-lg bg-primary-200 focus:translate-y-0 dark:bg-neutral-600"
+        href="#main-content">
+        <span class="font-bold text-primary-600 pe-2 dark:text-primary-400">&darr;</span>
+        Ana içeriğe geç
+      </a>
+    </div>
+    
+    
+      <div class="main-menu flex items-center w-full gap-2 p-1 pl-0">
+  
+  
+    <a href="/tr/" class="text-base font-medium truncate min-w-0 shrink">
+      Algan Ayzit
+    </a>
+  
+  <div class="flex items-center ms-auto">
+    <div class="hidden md:flex">
+      <nav class="flex items-center gap-x-5 h-12">
+  
+    
+      
+  
+    <a
+      href="/tr/about/"
+      
+      class="flex items-center bf-icon-color-hover"
+      aria-label="Hakkımda"
+      title="">
+      
+      
+        <span class="text-base font-medium break-normal">
+          Hakkımda
+        </span>
+      
+    </a>
+  
+
+    
+      
+  
+    <a
+      href="/tr/labnotes/"
+      
+      class="flex items-center bf-icon-color-hover"
+      aria-label="Laboratuvar Notları"
+      title="Laboratuvar Notları">
+      
+      
+        <span class="text-base font-medium break-normal">
+          Laboratuvar Notları
+        </span>
+      
+    </a>
+  
+
+    
+      
+  
+    <a
+      href="/tr/projects/"
+      
+      class="flex items-center bf-icon-color-hover"
+      aria-label="Projeler"
+      title="Projeler">
+      
+      
+        <span class="text-base font-medium break-normal">
+          Projeler
+        </span>
+      
+    </a>
+  
+
+    
+  
+
+  
+  <div class="translation nested-menu">
+    <button class="cursor-pointer flex items-center">
+      <span class="me-1">
+        <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+    <path fill="currentColor" d="M0 128C0 92.7 28.7 64 64 64H256h48 16H576c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H320 304 256 64c-35.3 0-64-28.7-64-64V128zm320 0V384H576V128H320zM178.3 175.9c-3.2-7.2-10.4-11.9-18.3-11.9s-15.1 4.7-18.3 11.9l-64 144c-4.5 10.1 .1 21.9 10.2 26.4s21.9-.1 26.4-10.2l8.9-20.1h73.6l8.9 20.1c4.5 10.1 16.3 14.6 26.4 10.2s14.6-16.3 10.2-26.4l-64-144zM160 233.2L179 276H141l19-42.8zM448 164c11 0 20 9 20 20v4h44 16c11 0 20 9 20 20s-9 20-20 20h-2l-1.6 4.5c-8.9 24.4-22.4 46.6-39.6 65.4c.9 .6 1.8 1.1 2.7 1.6l18.9 11.3c9.5 5.7 12.5 18 6.9 27.4s-18 12.5-27.4 6.9l-18.9-11.3c-4.5-2.7-8.8-5.5-13.1-8.5c-10.6 7.5-21.9 14-34 19.4l-3.6 1.6c-10.1 4.5-21.9-.1-26.4-10.2s.1-21.9 10.2-26.4l3.6-1.6c6.4-2.9 12.6-6.1 18.5-9.8l-12.2-12.2c-7.8-7.8-7.8-20.5 0-28.3s20.5-7.8 28.3 0l14.6 14.6 .5 .5c12.4-13.1 22.5-28.3 29.8-45H448 376c-11 0-20-9-20-20s9-20 20-20h52v-4c0-11 9-20 20-20z"/></svg></span>
+      </span>
+      <span class="text-sm font-medium bf-icon-color-hover" title="Katman 2 vs. Katman 3 Anahtarlama: Ağ Segmentasyonu ve Paket Akışının Mühendislik Mantığı">TR</span>
+    </button>
+    <ul class="menuhide">
+      <li class="rounded-xl backdrop-blur shadow-2xl p-2 flex flex-col gap-1">
+        
+          <a href="/labnotes/l2-l3/" class="flex items-center bf-icon-color-hover px-3 py-1">
+            <span class="text-sm font-sm" title="Layer 2 vs. Layer 3 Switching: The Engineering Logic Behind Network Segmentation and Packet Flow">
+              EN
+            </span>
+          </a>
+        
+          <a href="/tr/labnotes/l2-l3/" class="flex items-center bf-icon-color-hover px-3 py-1">
+            <span class="text-sm font-sm" title="Katman 2 vs. Katman 3 Anahtarlama: Ağ Segmentasyonu ve Paket Akışının Mühendislik Mantığı">
+              TR
+            </span>
+          </a>
+        
+          <a href="/de/labnotes/l2-l3/" class="flex items-center bf-icon-color-hover px-3 py-1">
+            <span class="text-sm font-sm" title="Layer 2 vs. Layer 3 Switching: Die technische Logik hinter Netzwerksegmentierung und Paketfluss">
+              DE
+            </span>
+          </a>
+        
+      </li>
+    </ul>
+  </div>
+
+
+  
+
+  
+    <button
+      id="search-button"
+      aria-label="Search"
+      class="text-base bf-icon-color-hover"
+      title="Ara (/)">
+      <span class="relative block icon"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+</span>
+    </button>
+  
+
+  
+    <div class="flex items-center">
+      <button
+        id="appearance-switcher"
+        aria-label="Dark mode switcher"
+        type="button"
+        class="text-base bf-icon-color-hover">
+        <div class="flex items-center justify-center dark:hidden">
+          <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M32 256c0-123.8 100.3-224 223.8-224c11.36 0 29.7 1.668 40.9 3.746c9.616 1.777 11.75 14.63 3.279 19.44C245 86.5 211.2 144.6 211.2 207.8c0 109.7 99.71 193 208.3 172.3c9.561-1.805 16.28 9.324 10.11 16.95C387.9 448.6 324.8 480 255.8 480C132.1 480 32 379.6 32 256z"/></svg>
+</span>
+        </div>
+        <div class="items-center justify-center hidden dark:flex">
+          <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 159.1c-53.02 0-95.1 42.98-95.1 95.1S202.1 351.1 256 351.1s95.1-42.98 95.1-95.1S309 159.1 256 159.1zM509.3 347L446.1 255.1l63.15-91.01c6.332-9.125 1.104-21.74-9.826-23.72l-109-19.7l-19.7-109c-1.975-10.93-14.59-16.16-23.72-9.824L256 65.89L164.1 2.736c-9.125-6.332-21.74-1.107-23.72 9.824L121.6 121.6L12.56 141.3C1.633 143.2-3.596 155.9 2.736 164.1L65.89 256l-63.15 91.01c-6.332 9.125-1.105 21.74 9.824 23.72l109 19.7l19.7 109c1.975 10.93 14.59 16.16 23.72 9.824L256 446.1l91.01 63.15c9.127 6.334 21.75 1.107 23.72-9.822l19.7-109l109-19.7C510.4 368.8 515.6 356.1 509.3 347zM256 383.1c-70.69 0-127.1-57.31-127.1-127.1c0-70.69 57.31-127.1 127.1-127.1s127.1 57.3 127.1 127.1C383.1 326.7 326.7 383.1 256 383.1z"/></svg>
+</span>
+        </div>
+      </button>
+    </div>
+  
+</nav>
+
+
+
+    </div>
+    <div class="flex md:hidden">
+      <div class="flex items-center h-14 gap-4">
+  
+    <button
+      id="search-button-mobile"
+      aria-label="Search"
+      class="flex items-center justify-center bf-icon-color-hover"
+      title="Ara (/)">
+      <span class="relative block icon"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+</span>
+    </button>
+  
+
+  
+    <button
+      id="appearance-switcher-mobile"
+      type="button"
+      aria-label="Dark mode switcher"
+      class="flex items-center justify-center text-neutral-900 hover:text-primary-600 dark:text-neutral-200 dark:hover:text-primary-400">
+      <div class="dark:hidden">
+        <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M32 256c0-123.8 100.3-224 223.8-224c11.36 0 29.7 1.668 40.9 3.746c9.616 1.777 11.75 14.63 3.279 19.44C245 86.5 211.2 144.6 211.2 207.8c0 109.7 99.71 193 208.3 172.3c9.561-1.805 16.28 9.324 10.11 16.95C387.9 448.6 324.8 480 255.8 480C132.1 480 32 379.6 32 256z"/></svg>
+</span>
+      </div>
+      <div class="hidden dark:block">
+        <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 159.1c-53.02 0-95.1 42.98-95.1 95.1S202.1 351.1 256 351.1s95.1-42.98 95.1-95.1S309 159.1 256 159.1zM509.3 347L446.1 255.1l63.15-91.01c6.332-9.125 1.104-21.74-9.826-23.72l-109-19.7l-19.7-109c-1.975-10.93-14.59-16.16-23.72-9.824L256 65.89L164.1 2.736c-9.125-6.332-21.74-1.107-23.72 9.824L121.6 121.6L12.56 141.3C1.633 143.2-3.596 155.9 2.736 164.1L65.89 256l-63.15 91.01c-6.332 9.125-1.105 21.74 9.824 23.72l109 19.7l19.7 109c1.975 10.93 14.59 16.16 23.72 9.824L256 446.1l91.01 63.15c9.127 6.334 21.75 1.107 23.72-9.822l19.7-109l109-19.7C510.4 368.8 515.6 356.1 509.3 347zM256 383.1c-70.69 0-127.1-57.31-127.1-127.1c0-70.69 57.31-127.1 127.1-127.1s127.1 57.3 127.1 127.1C383.1 326.7 326.7 383.1 256 383.1z"/></svg>
+</span>
+      </div>
+    </button>
+  
+
+  
+    <input type="checkbox" id="mobile-menu-toggle" autocomplete="off" class="hidden peer">
+    <label for="mobile-menu-toggle" class="flex items-center justify-center cursor-pointer bf-icon-color-hover">
+      <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M0 96C0 78.33 14.33 64 32 64H416C433.7 64 448 78.33 448 96C448 113.7 433.7 128 416 128H32C14.33 128 0 113.7 0 96zM0 256C0 238.3 14.33 224 32 224H416C433.7 224 448 238.3 448 256C448 273.7 433.7 288 416 288H32C14.33 288 0 273.7 0 256zM416 448H32C14.33 448 0 433.7 0 416C0 398.3 14.33 384 32 384H416C433.7 384 448 398.3 448 416C448 433.7 433.7 448 416 448z"/></svg>
+</span>
+    </label>
+
+    <div
+      role="dialog"
+      aria-modal="true"
+      style="scrollbar-gutter: stable;"
+      class="fixed inset-0 z-50 invisible overflow-y-auto px-6 py-20 opacity-0 transition-[opacity,visibility] duration-300 peer-checked:visible peer-checked:opacity-100 bg-neutral-50/97 dark:bg-neutral-900/99
+      bf-scrollbar">
+      <label
+        for="mobile-menu-toggle"
+        class="fixed end-8 top-5 flex items-center justify-center z-50 h-12 w-12 cursor-pointer select-none rounded-full bf-icon-color-hover border bf-border-color bf-border-color-hover bg-neutral-50 dark:bg-neutral-900">
+        <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg>
+</span>
+      </label>
+      <nav class="mx-auto max-w-md space-y-6">
+        
+  
+    
+    <div class="px-2">
+      <a
+        href="/tr/about/"
+        aria-label="Hakkımda"
+        
+        class="flex items-center gap-4 group bf-icon-color-hover text-neutral-700 dark:text-neutral-200">
+        
+        <span title="" class="text-2xl font-bold tracking-tight">
+          Hakkımda
+        </span>
+        
+      </a>
+
+      
+    </div>
+  
+    
+    <div class="px-2">
+      <a
+        href="/tr/labnotes/"
+        aria-label="Laboratuvar Notları"
+        
+        class="flex items-center gap-4 group bf-icon-color-hover text-neutral-700 dark:text-neutral-200">
+        
+        <span title="Laboratuvar Notları" class="text-2xl font-bold tracking-tight">
+          Laboratuvar Notları
+        </span>
+        
+      </a>
+
+      
+    </div>
+  
+    
+    <div class="px-2">
+      <a
+        href="/tr/projects/"
+        aria-label="Projeler"
+        
+        class="flex items-center gap-4 group bf-icon-color-hover text-neutral-700 dark:text-neutral-200">
+        
+        <span title="Projeler" class="text-2xl font-bold tracking-tight">
+          Projeler
+        </span>
+        
+      </a>
+
+      
+    </div>
+  
+
+        
+  
+
+        
+  
+    <div
+      class="flex flex-wrap items-center [&_span]:text-2xl [&_.translation_button_.icon]:text-4xl! [&_.translation_button_span]:text-base! [&_.translation_.menuhide_span]:text-sm! gap-x-6 ps-2 mt-8 pt-8 border-t bf-border-color">
+      
+  <div class="translation nested-menu">
+    <button class="cursor-pointer flex items-center">
+      <span class="me-1">
+        <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+    <path fill="currentColor" d="M0 128C0 92.7 28.7 64 64 64H256h48 16H576c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H320 304 256 64c-35.3 0-64-28.7-64-64V128zm320 0V384H576V128H320zM178.3 175.9c-3.2-7.2-10.4-11.9-18.3-11.9s-15.1 4.7-18.3 11.9l-64 144c-4.5 10.1 .1 21.9 10.2 26.4s21.9-.1 26.4-10.2l8.9-20.1h73.6l8.9 20.1c4.5 10.1 16.3 14.6 26.4 10.2s14.6-16.3 10.2-26.4l-64-144zM160 233.2L179 276H141l19-42.8zM448 164c11 0 20 9 20 20v4h44 16c11 0 20 9 20 20s-9 20-20 20h-2l-1.6 4.5c-8.9 24.4-22.4 46.6-39.6 65.4c.9 .6 1.8 1.1 2.7 1.6l18.9 11.3c9.5 5.7 12.5 18 6.9 27.4s-18 12.5-27.4 6.9l-18.9-11.3c-4.5-2.7-8.8-5.5-13.1-8.5c-10.6 7.5-21.9 14-34 19.4l-3.6 1.6c-10.1 4.5-21.9-.1-26.4-10.2s.1-21.9 10.2-26.4l3.6-1.6c6.4-2.9 12.6-6.1 18.5-9.8l-12.2-12.2c-7.8-7.8-7.8-20.5 0-28.3s20.5-7.8 28.3 0l14.6 14.6 .5 .5c12.4-13.1 22.5-28.3 29.8-45H448 376c-11 0-20-9-20-20s9-20 20-20h52v-4c0-11 9-20 20-20z"/></svg></span>
+      </span>
+      <span class="text-sm font-medium bf-icon-color-hover" title="Katman 2 vs. Katman 3 Anahtarlama: Ağ Segmentasyonu ve Paket Akışının Mühendislik Mantığı">TR</span>
+    </button>
+    <ul class="menuhide">
+      <li class="rounded-xl backdrop-blur shadow-2xl p-2 flex flex-col gap-1">
+        
+          <a href="/labnotes/l2-l3/" class="flex items-center bf-icon-color-hover px-3 py-1">
+            <span class="text-sm font-sm" title="Layer 2 vs. Layer 3 Switching: The Engineering Logic Behind Network Segmentation and Packet Flow">
+              EN
+            </span>
+          </a>
+        
+          <a href="/tr/labnotes/l2-l3/" class="flex items-center bf-icon-color-hover px-3 py-1">
+            <span class="text-sm font-sm" title="Katman 2 vs. Katman 3 Anahtarlama: Ağ Segmentasyonu ve Paket Akışının Mühendislik Mantığı">
+              TR
+            </span>
+          </a>
+        
+          <a href="/de/labnotes/l2-l3/" class="flex items-center bf-icon-color-hover px-3 py-1">
+            <span class="text-sm font-sm" title="Layer 2 vs. Layer 3 Switching: Die technische Logik hinter Netzwerksegmentierung und Paketfluss">
+              DE
+            </span>
+          </a>
+        
+      </li>
+    </ul>
+  </div>
+
+
+
+      
+    </div>
+  
+
+      </nav>
+    </div>
+  
+</div>
+
+
+
+
+
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+    
+    <div class="relative flex flex-col grow">
+      <main id="main-content" class="grow">
+        
+  
+  <article>
+    
+    
+
+    
+    <header id="single_header" class="mt-5 max-w-prose">
+      
+      <h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">
+        Katman 2 vs. Katman 3 Anahtarlama: Ağ Segmentasyonu ve Paket Akışının Mühendislik Mantığı
+      </h1>
+      <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
+        
+
+
+
+
+
+  
+  
+
+
+
+  
+
+  
+  
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <div class="flex flex-row flex-wrap items-center">
+    
+    
+      <time datetime="2026-08-05T00:00:00&#43;00:00">5 Ağustos 2026</time><span class="px-2 text-primary-500">&middot;</span><span>750 kelime</span><span class="px-2 text-primary-500">&middot;</span><span title="Okuma süresi">4 dk</span>
+    
+
+    
+    
+  </div>
+
+  
+
+  
+  
+
+
+      </div>
+      
+        
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+    
+    
+<div class="flex author">
+  
+  <div class="place-self-center">
+    
+      <div class="text-[0.6rem] uppercase leading-3 text-neutral-500 dark:text-neutral-400">
+        Yazar
+      </div>
+      <div class="font-semibold leading-6 text-neutral-800 dark:text-neutral-300">
+        Algan Ayzit
+      </div>
+    
+    
+      <div class="text-sm text-neutral-700 dark:text-neutral-400">Güvenli ağ altyapıları, bulut bilişim ve otomasyon teknolojileri üzerine çalışıyor.</div>
+    
+    <div class="text-2xl sm:text-lg">
+  <div class="flex flex-wrap text-neutral-400 dark:text-neutral-500 space-x-2">
+    
+      
+        
+        <a
+          class=" hover:text-primary-700 dark:hover:text-primary-400"
+          href="https://github.com/alganayzit"
+          
+          target="_blank"
+          aria-label="Github"
+          title="Github"
+          rel="me noopener noreferrer"
+          ><span class="inline-block align-text-bottom"><span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+</span></span></a
+        >
+      
+    
+      
+        
+        <a
+          class=" hover:text-primary-700 dark:hover:text-primary-400"
+          href="https://www.linkedin.com/in/algan-ayzit-472726224"
+          
+          target="_blank"
+          aria-label="Linkedin"
+          title="Linkedin"
+          rel="me noopener noreferrer"
+          ><span class="inline-block align-text-bottom"><span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+</span></span></a
+        >
+      
+    
+  </div>
+
+</div>
+  </div>
+</div>
+
+  
+
+  
+
+  
+    <div class="mb-5"></div>
+  
+
+      
+    </header>
+
+    
+    <section class="flex flex-col max-w-full mt-0 prose dark:prose-invert lg:flex-row">
+      
+      
+      
+      
+      
+
+
+      <div class="min-w-0 min-h-0 max-w-fit">
+        
+
+        <div class="article-content max-w-prose mb-20">
+          <figure><img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="auto"
+    alt="L2-L3"
+    width="2760"
+    height="1560"
+    src="/labnotes/l2-l3/feature_hu_ef4a35cc3b0b7244.png"
+    srcset="/labnotes/l2-l3/feature_hu_ef4a35cc3b0b7244.png 800w, /labnotes/l2-l3/feature_hu_c9645b9252e8b853.png 1280w"
+    sizes="(min-width: 768px) 50vw, 65vw"
+    data-zoom-src="/labnotes/l2-l3/feature.png"></figure>
+<p>Bir bilgisayar ağının tasarımında karşılaşılan en temel mimari kararlardan biri, trafiğin ne kadarının Katman 2 (Data Link) seviyesinde tutulacağı ve ne zaman Katman 3 (Network) seviyesine taşınacağıdır. Yeni başlayanlar veya altyapı mimarisini inceleyenler için şu soru sıklıkla kafa karıştırır: Cihazlar aynı bina içinde veya aynı switch üzerinde bulunuyorsa, neden her şeyi tek bir düz Katman 2 ağında bırakmıyoruz? Neden VLAN&rsquo;lar oluşturup araya Katman 3 anahtarlama ve yönlendirme katmanları ekliyoruz?</p>
+<p>Bu yazıda, düz bir Katman 2 ağının donanımsal ve mantıksal limitlerini, Katman 3 anahtarlamanın (L3 Switching) nasıl çalıştığını ve bir paketin iki katman arasında geçerken yaşadığı dönüşümü mühendislik perspektifinden ele alıyoruz.</p>
+<hr>
+
+<h2 class="relative group">1. Tek Bir Katman 2 Ağında Kalmanın Limitleri: Broadcast ve Donanım Yükü
+    <div id="1-tek-bir-katman-2-ağında-kalmanın-limitleri-broadcast-ve-donanım-yükü" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#1-tek-bir-katman-2-a%c4%9f%c4%b1nda-kalman%c4%b1n-limitleri-broadcast-ve-donan%c4%b1m-y%c3%bck%c3%bc" aria-label="Anchor">#</a>
+    </span>
+    
+</h2>
+<p>Bir ağdaki tüm cihazlar aynı Katman 2 alanında (Broadcast Domain) bulunduğunda, bir cihazın gönderdiği her yayılım (broadcast) paketi —örneğin ARP istekleri veya DHCP keşif paketleri— ağdaki diğer tüm cihazlara ulaşır.</p>
+<p>Ölçeksiz büyüyen bir Katman 2 ağında iki temel sorun ortaya çıkar:</p>
+<ul>
+<li><strong>Broadcast Fırtınaları ve CPU Yükü:</strong> Ağdaki cihaz sayısı arttıkça yayın paketlerinin sayısı katlanarak artar. Ağ kartları bu paketleri işlemek zorunda kaldığı için son kullanıcı cihazlarında ve switch&rsquo;lerde işlemci yükü yükselir.</li>
+<li><strong>MAC Adres Tablosu (CAM Table) Şişmesi:</strong> L2 switch&rsquo;ler paket iletimini MAC adres tablolarına göre yapar. Ağ büyüdükçe bu tabloların kapasitesi zorlanır ve donanımsal arama süreleri uzar.</li>
+</ul>
+<p>Bu sınırları aşmanın yolu, ağı mantıksal parçalara yani VLAN&rsquo;lara bölmektir. Ancak VLAN&rsquo;lar oluşturulduğunda, bu farklı segmentlerin birbiriyle nasıl haberleşeceği sorusu ortaya çıkar.</p>
+<hr>
+
+<h2 class="relative group">2. Katman 2 vs. Katman 3 Anahtarlama Mantığı
+    <div id="2-katman-2-vs-katman-3-anahtarlama-mantığı" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#2-katman-2-vs-katman-3-anahtarlama-mant%c4%b1%c4%9f%c4%b1" aria-label="Anchor">#</a>
+    </span>
+    
+</h2>
+<p>Katman 2 anahtarlamada işlem tamamen MAC adresleri ve Ethernet Frame&rsquo;leri üzerinden yürür. Cihazlar aynı subnet içindeyse, kaynak cihaz hedef cihazın MAC adresini ARP ile öğrenir ve switch bu iletimi donanımsal olarak (ASIC çiplerini kullanarak) hat hızında yapabilir.</p>
+<p>Katman 3 anahtarlamada ise süreç IP adresleri ve paketler üzerinden yürür. Farklı VLAN&rsquo;lardaki veya subnet&rsquo;lerdeki cihazlar haberleşmek istediğinde, Katman 2 anahtarlama tek başına yetersiz kalır. Burada devreye Switched Virtual Interface (SVI) ve IP Routing mekanizmaları girer.</p>
+<hr>
+
+<h2 class="relative group">3. Klasik Router ve L3 Switch Arasındaki Çizgi
+    <div id="3-klasik-router-ve-l3-switch-arasındaki-çizgi" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#3-klasik-router-ve-l3-switch-aras%c4%b1ndaki-%c3%a7izgi" aria-label="Anchor">#</a>
+    </span>
+    
+</h2>
+<p>Zaten bir Router varsa, neden Katman 3 Switch (L3 Switch) kullanıyoruz? Ya da tam tersi, L3 Switch varsa Router&rsquo;a neden ihtiyaç duyuyoruz?</p>
+<p>İki cihaz da IP routing yapabilse de, mimari ve donanım tasarımları farklı amaçlara hizmet eder:</p>
+<ul>
+<li><strong>L3 Switch (Inter-VLAN Routing):</strong> Yönlendirme kararını yazılımsal CPU yerine doğrudan donanımsal ASIC veya CEF (Cisco Express Forwarding) tabloları üzerinden yapar. Bu sayede local ağdaki VLAN&rsquo;lar arası trafiği gigabit/terabit seviyelerindeki hat hızlarında (wire-speed) çok düşük gecikmeyle yönlendirir.</li>
+<li><strong>Router (Edge / WAN Sınırı):</strong> Genellikle daha karmaşık yönlendirme protokollerini (BGP vb.), geniş alan ağı (WAN) teknolojilerini, NAT (Network Address Translation) işlemlerini, derinlemesine güvenlik ve VPN tünelleme süreçlerini yürütmek için tasarlanmıştır. Port yoğunlukları L3 Switch&rsquo;e göre daha düşüktür ancak paket işleme yetenekleri daha esnektir.</li>
+</ul>
+<p>Özetle; bina veya veri merkezi içindeki VLAN&rsquo;lar arası yüksek hızlı yönlendirmeyi L3 Switch üstlenirken, dış dünyaya veya farklı lokasyonlara çıkış sınırını Router yönetir.</p>
+<hr>
+
+<h2 class="relative group">4. Ağ Segmentasyonu: Güvenlik ve Performans Dengesi
+    <div id="4-ağ-segmentasyonu-güvenlik-ve-performans-dengesi" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#4-a%c4%9f-segmentasyonu-g%c3%bcvenlik-ve-performans-dengesi" aria-label="Anchor">#</a>
+    </span>
+    
+</h2>
+<p>Katman 3 anahtarlamanın getirdiği en büyük avantaj ağ segmentasyonudur. Ağ küçük yayın alanlarına bölündüğünde sadece performans kazanılmaz; aynı zamanda güvenlik sınırları da çizilmiş olur.</p>
+<p>Farklı VLAN&rsquo;lar arasına koyulan L3 Switch veya Firewall katmanlarında Erişim Kontrol Listeleri (ACL - Access Control List) tanımlanarak, örneğin &ldquo;İnsan Kaynakları VLAN&rsquo;ı Sunucu VLAN&rsquo;ındaki sadece belirli servislere erişebilsin, IoT cihazları ise hiçbir iç ağa erişemesin&rdquo; gibi kurallar mantıksal olarak uygulanabilir hale gelir.</p>
+<hr>
+
+<h2 class="relative group">5. Paket Akış Analizi: Bir Paket Katman Değiştirirken Ne Olur?
+    <div id="5-paket-akış-analizi-bir-paket-katman-değiştirirken-ne-olur" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#5-paket-ak%c4%b1%c5%9f-analizi-bir-paket-katman-de%c4%9fi%c5%9ftirirken-ne-olur" aria-label="Anchor">#</a>
+    </span>
+    
+</h2>
+<p>Mimarinin tam anlaşılması için bir paketin izlediği yolu adım adım takip etmek gerekir. Örneğin, VLAN 10&rsquo;daki Bilgisayar A, VLAN 20&rsquo;deki Sunucu B&rsquo;ye bir veri paketi göndermek istediğinde gerçekleşen olaylar şunlardır:</p>
+<ol>
+<li><strong>Subnet Kontrolü:</strong> Bilgisayar A, kendi IP adresi ve subnet mask&rsquo;ı ile hedef Sunucu B&rsquo;nin IP adresini karşılaştırır. Farklı bir ağda olduğunu anlar.</li>
+<li><strong>Default Gateway&rsquo;e Gönderim:</strong> Paket doğrudan Sunucu B&rsquo;nin MAC adresine değil, kendi Varsayılan Ağ Geçidinin (Default Gateway - L3 Switch üzerindeki SVI arabirimi) MAC adresine yönlendirilir.</li>
+<li><strong>L2 Header Değişimi:</strong> L3 Switch paketi aldığında IP başlığındaki (L3) Kaynak ve Hedef IP adreslerini ASLA değiştirmez (TTL değeri 1 azaltılır). Ancak paket L3 Switch&rsquo;ten çıkıp VLAN 20&rsquo;deki Sunucu B&rsquo;ye doğru iletilirken, Ethernet Başlığı (L2 Frame Header) yeniden yazılır. Kaynak MAC adresi artık L3 Switch&rsquo;in VLAN 20 arabirimi, Hedef MAC adresi ise Sunucu B&rsquo;nin MAC adresi olur.</li>
+<li><strong>Teslimat:</strong> Paket VLAN 20 seviyesinde L2 olarak Sunucu B&rsquo;ye ulaştırılır.</li>
+</ol>
+<hr>
+
+<h2 class="relative group">Sonuç
+    <div id="sonuç" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#sonu%c3%a7" aria-label="Anchor">#</a>
+    </span>
+    
+</h2>
+<p>Katman 2 ve Katman 3 teknolojilerini birbirinin rakibi değil, bir mimarinin tamamlayıcı parçaları olarak görmek gerekir. Anahtarlama (Switching) trafiği yerel düzeyde ve donanım hızında tutarken; Yönlendirme (Routing) bu yerel alanları kontrol edilebilir, güvenli ve ölçeklenebilir yapılara dönüştürür. İyi tasarlanmış bir ağ mimarisinde L2 sınırları olabildiğince dar tutulur ve trafik en kısa sürede L3 seviyesine çekilerek yönetilir.</p>
+
+          
+          
+          
+        </div>
+        
+        
+
+        
+
+        
+
+      </div>
+    </section>
+
+    
+    <footer class="pt-8 max-w-prose print:hidden">
+      
+  
+    
+    
+    
+    <div class="pt-8">
+      <hr class="border-dotted border-neutral-300 dark:border-neutral-600">
+      <div class="flex justify-between pt-3">
+        <span class="flex flex-col">
+          
+            <a
+              class="flex text-neutral-700 hover:text-primary-600 dark:text-neutral dark:hover:text-primary-400"
+              href="/tr/labnotes/cloud-computing/">
+              <span class="leading-6">
+                <span class="inline-block rtl:rotate-180">&larr;</span>&ensp;Mühendisler İçin Kapsamlı Cloud Computing 101 Rehberi
+              </span>
+            </a>
+            
+              <span class="ms-6 mt-1 text-xs text-neutral-500 dark:text-neutral-400">
+                <time datetime="2026-07-01T00:00:00&#43;00:00">1 Temmuz 2026</time>
+              </span>
+            
+          
+        </span>
+        <span class="flex flex-col items-end">
+          
+        </span>
+      </div>
+    </div>
+  
+
+
+      
+    </footer>
+  </article>
+
+        
+
+
+  
+
+
+
+
+
+
+<div
+  id="scroll-to-top"
+  class="fixed bottom-6 end-6 z-50 transform translate-y-4 opacity-0 duration-200">
+  <a
+    href="#the-top"
+    class="pointer-events-auto flex h-12 w-12 items-center justify-center rounded-full bg-neutral/50 text-xl text-neutral-700 hover:text-primary-600 dark:bg-neutral-800/50 dark:text-neutral dark:hover:text-primary-400"
+    aria-label="Yukarı çık"
+    title="Yukarı çık">
+    &uarr;
+  </a>
+</div>
+
+      </main><footer id="site-footer" class="py-10 print:hidden">
+  
+  
+    
+  
+  <div class="flex items-center justify-between">
+    
+    
+      <p class="text-sm text-neutral-500 dark:text-neutral-400">
+          &copy;
+          2026
+          Algan Ayzit
+      </p>
+    
+
+    
+    
+      <p class="text-xs text-neutral-500 dark:text-neutral-400">
+        
+        
+        <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500"
+          href="https://gohugo.io/" target="_blank" rel="noopener noreferrer">Hugo</a> &amp; <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500"
+          href="https://blowfish.page/" target="_blank" rel="noopener noreferrer">Blowfish</a> tarafından desteklenmektedir.
+      </p>
+    
+  </div>
+  
+    <script>
+      mediumZoom(document.querySelectorAll("img:not(.nozoom)"), {
+        margin: 24,
+        background: "rgba(0,0,0,0.5)",
+        scrollOffset: 0,
+      });
+    </script>
+  
+  
+  
+</footer>
+<div
+  id="search-wrapper"
+  class="invisible fixed inset-0 flex h-screen w-screen cursor-default flex-col bg-neutral-500/50 p-4 backdrop-blur-sm dark:bg-neutral-900/50 sm:p-6 md:p-[10vh] lg:p-[12vh] z-500"
+  data-url="http://localhost:1313/tr/">
+  <div
+    id="search-modal"
+    class="flex flex-col w-full max-w-3xl min-h-0 mx-auto border rounded-md shadow-lg top-20 border-neutral-200 bg-neutral dark:border-neutral-700 dark:bg-neutral-800">
+    <header class="relative z-10 flex items-center justify-between flex-none px-2">
+      <form class="flex items-center flex-auto min-w-0">
+        <div class="flex items-center justify-center w-8 h-8 text-neutral-400">
+          <span class="relative block icon"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+</span>
+        </div>
+        <input
+          type="search"
+          id="search-query"
+          class="flex flex-auto h-12 mx-1 bg-transparent appearance-none focus:outline-dotted focus:outline-2 focus:outline-transparent"
+          placeholder="Ara"
+          tabindex="0">
+      </form>
+      <button
+        id="close-search-button"
+        class="flex items-center justify-center w-8 h-8 text-neutral-700 hover:text-primary-600 dark:text-neutral dark:hover:text-primary-400"
+        title="Kapat (Esc)">
+        <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg>
+</span>
+      </button>
+    </header>
+    <section class="flex-auto px-2 overflow-auto">
+      <ul id="search-results">
+        
+      </ul>
+    </section>
+  </div>
+</div>
+
+    </div>
+  </body>
+  
+</html>

@@ -9,7 +9,27 @@
     <managingEditor>alganayzit@gmail.com (Algan Ayzit)</managingEditor>
     <webMaster>alganayzit@gmail.com (Algan Ayzit)</webMaster>
     <copyright>© 2026 Algan Ayzit</copyright>
-    <atom:link href="http://localhost:1313/tags/networking/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 05 Aug 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/networking/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Layer 2 vs. Layer 3 Switching: The Engineering Logic Behind Network Segmentation and Packet Flow</title>
+      <link>http://localhost:1313/labnotes/l2-l3/l2-l3/</link>
+      <pubDate>Wed, 05 Aug 2026 00:00:00 +0000</pubDate>
+      <author>alganayzit@gmail.com (Algan Ayzit)</author>
+      <guid>http://localhost:1313/labnotes/l2-l3/l2-l3/</guid>
+      <description>The hardware and logical limits of a flat Layer 2 network, how Layer 3 switching (L3 Switching) works, and the transformation a packet undergoes as it moves between the two layers, from an engineering perspective.</description>
+      
+    </item>
+    
+    <item>
+      <title>A Comprehensive Cloud Computing 101 Guide for Engineers</title>
+      <link>http://localhost:1313/labnotes/cloud-computing/</link>
+      <pubDate>Sat, 01 Aug 2026 00:00:00 +0000</pubDate>
+      <author>alganayzit@gmail.com (Algan Ayzit)</author>
+      <guid>http://localhost:1313/labnotes/cloud-computing/</guid>
+      <description>An in-depth look at the shift from traditional data centers to modern cloud architectures. Architectural components, software-defined networking (SDN), VPC design, security, and Infrastructure as Code (IaC) principles.</description>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:1313/labnotes/cloud-computing/feature.png" />
+    </item>
     
   </channel>
 </rss>

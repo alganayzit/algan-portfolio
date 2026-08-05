@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Switching on Algan Ayzit</title>
+    <link>http://localhost:1313/tags/switching/</link>
+    <description>Recent content in Switching on Algan Ayzit</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <managingEditor>alganayzit@gmail.com (Algan Ayzit)</managingEditor>
+    <webMaster>alganayzit@gmail.com (Algan Ayzit)</webMaster>
+    <copyright>© 2026 Algan Ayzit</copyright>
+    <lastBuildDate>Wed, 05 Aug 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/switching/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Layer 2 vs. Layer 3 Switching: The Engineering Logic Behind Network Segmentation and Packet Flow</title>
+      <link>http://localhost:1313/labnotes/l2-l3/l2-l3/</link>
+      <pubDate>Wed, 05 Aug 2026 00:00:00 +0000</pubDate>
+      <author>alganayzit@gmail.com (Algan Ayzit)</author>
+      <guid>http://localhost:1313/labnotes/l2-l3/l2-l3/</guid>
+      <description>The hardware and logical limits of a flat Layer 2 network, how Layer 3 switching (L3 Switching) works, and the transformation a packet undergoes as it moves between the two layers, from an engineering perspective.</description>
+      
+    </item>
+    
+  </channel>
+</rss>

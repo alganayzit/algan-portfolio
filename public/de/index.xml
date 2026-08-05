@@ -7,12 +7,22 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>de</language>
     <copyright>© 2026 Algan Ayzit</copyright>
-    <lastBuildDate>Sat, 01 Aug 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/de/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 05 Aug 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/de/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Layer 2 vs. Layer 3 Switching: Die technische Logik hinter Netzwerksegmentierung und Paketfluss</title>
+      <link>http://localhost:1313/de/labnotes/l2-l3/</link>
+      <pubDate>Wed, 05 Aug 2026 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/de/labnotes/l2-l3/</guid>
+      <description>Die hardwareseitigen und logischen Grenzen eines flachen Layer-2-Netzwerks, die Funktionsweise von Layer-3-Switching (L3 Switching) und die Transformation, die ein Paket beim Übergang zwischen den beiden Schichten durchläuft – aus technischer Perspektive.</description>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:1313/labnotes/l2-l3/feature.png" />
+    </item>
     
     <item>
       <title>Ein umfassender Cloud-Computing-101-Leitfaden für Ingenieure</title>
       <link>http://localhost:1313/de/labnotes/cloud-computing/</link>
-      <pubDate>Sat, 01 Aug 2026 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 01 Jul 2026 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/de/labnotes/cloud-computing/</guid>
       <description>Ein tiefgehender Blick auf den Wandel von traditionellen Rechenzentren zu modernen Cloud-Architekturen. Architekturkomponenten, Software-Defined Networking (SDN), VPC-Design, Sicherheit und die Prinzipien von Infrastructure as Code (IaC).</description>

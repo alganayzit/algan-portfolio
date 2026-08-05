@@ -9,7 +9,127 @@
     <managingEditor>alganayzit@gmail.com (Algan Ayzit)</managingEditor>
     <webMaster>alganayzit@gmail.com (Algan Ayzit)</webMaster>
     <copyright>© 2026 Algan Ayzit</copyright>
-    <atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 05 Aug 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>L2</title>
+      <link>http://localhost:1313/tags/l2/</link>
+      <pubDate>Wed, 05 Aug 2026 00:00:00 +0000</pubDate>
+      <author>alganayzit@gmail.com (Algan Ayzit)</author>
+      <guid>http://localhost:1313/tags/l2/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>L3</title>
+      <link>http://localhost:1313/tags/l3/</link>
+      <pubDate>Wed, 05 Aug 2026 00:00:00 +0000</pubDate>
+      <author>alganayzit@gmail.com (Algan Ayzit)</author>
+      <guid>http://localhost:1313/tags/l3/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Networking</title>
+      <link>http://localhost:1313/tags/networking/</link>
+      <pubDate>Wed, 05 Aug 2026 00:00:00 +0000</pubDate>
+      <author>alganayzit@gmail.com (Algan Ayzit)</author>
+      <guid>http://localhost:1313/tags/networking/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Routing</title>
+      <link>http://localhost:1313/tags/routing/</link>
+      <pubDate>Wed, 05 Aug 2026 00:00:00 +0000</pubDate>
+      <author>alganayzit@gmail.com (Algan Ayzit)</author>
+      <guid>http://localhost:1313/tags/routing/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Security</title>
+      <link>http://localhost:1313/tags/security/</link>
+      <pubDate>Wed, 05 Aug 2026 00:00:00 +0000</pubDate>
+      <author>alganayzit@gmail.com (Algan Ayzit)</author>
+      <guid>http://localhost:1313/tags/security/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Switching</title>
+      <link>http://localhost:1313/tags/switching/</link>
+      <pubDate>Wed, 05 Aug 2026 00:00:00 +0000</pubDate>
+      <author>alganayzit@gmail.com (Algan Ayzit)</author>
+      <guid>http://localhost:1313/tags/switching/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>VLAN</title>
+      <link>http://localhost:1313/tags/vlan/</link>
+      <pubDate>Wed, 05 Aug 2026 00:00:00 +0000</pubDate>
+      <author>alganayzit@gmail.com (Algan Ayzit)</author>
+      <guid>http://localhost:1313/tags/vlan/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>AWS</title>
+      <link>http://localhost:1313/tags/aws/</link>
+      <pubDate>Sat, 01 Aug 2026 00:00:00 +0000</pubDate>
+      <author>alganayzit@gmail.com (Algan Ayzit)</author>
+      <guid>http://localhost:1313/tags/aws/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Cloud</title>
+      <link>http://localhost:1313/tags/cloud/</link>
+      <pubDate>Sat, 01 Aug 2026 00:00:00 +0000</pubDate>
+      <author>alganayzit@gmail.com (Algan Ayzit)</author>
+      <guid>http://localhost:1313/tags/cloud/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>DevOps</title>
+      <link>http://localhost:1313/tags/devops/</link>
+      <pubDate>Sat, 01 Aug 2026 00:00:00 +0000</pubDate>
+      <author>alganayzit@gmail.com (Algan Ayzit)</author>
+      <guid>http://localhost:1313/tags/devops/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Infrastructure</title>
+      <link>http://localhost:1313/tags/infrastructure/</link>
+      <pubDate>Sat, 01 Aug 2026 00:00:00 +0000</pubDate>
+      <author>alganayzit@gmail.com (Algan Ayzit)</author>
+      <guid>http://localhost:1313/tags/infrastructure/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Terraform</title>
+      <link>http://localhost:1313/tags/terraform/</link>
+      <pubDate>Sat, 01 Aug 2026 00:00:00 +0000</pubDate>
+      <author>alganayzit@gmail.com (Algan Ayzit)</author>
+      <guid>http://localhost:1313/tags/terraform/</guid>
+      <description></description>
+      
+    </item>
     
   </channel>
 </rss>

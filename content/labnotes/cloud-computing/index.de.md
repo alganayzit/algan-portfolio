@@ -1,6 +1,6 @@
 ---
 title: "Ein umfassender Cloud-Computing-101-Leitfaden für Ingenieure"
-date: 2026-08-01
+date: 2026-07-01
 draft: false
 tags: ["Cloud", "AWS", "Networking", "DevOps", "Infrastructure", "Terraform", "Security"]
 categories: ["Cloud Computing"]
