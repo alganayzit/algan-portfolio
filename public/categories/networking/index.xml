@@ -13,12 +13,12 @@
     
     <item>
       <title>Layer 2 vs. Layer 3 Switching: The Engineering Logic Behind Network Segmentation and Packet Flow</title>
-      <link>http://localhost:1313/labnotes/l2-l3/l2-l3/</link>
+      <link>http://localhost:1313/labnotes/l2-l3/</link>
       <pubDate>Wed, 05 Aug 2026 00:00:00 +0000</pubDate>
       <author>alganayzit@gmail.com (Algan Ayzit)</author>
-      <guid>http://localhost:1313/labnotes/l2-l3/l2-l3/</guid>
+      <guid>http://localhost:1313/labnotes/l2-l3/</guid>
       <description>The hardware and logical limits of a flat Layer 2 network, how Layer 3 switching (L3 Switching) works, and the transformation a packet undergoes as it moves between the two layers, from an engineering perspective.</description>
-      
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:1313/labnotes/l2-l3/feature.png" />
     </item>
     
   </channel>

@@ -11,18 +11,18 @@
     
     <item>
       <title>Katman 2 vs. Katman 3 Anahtarlama: Ağ Segmentasyonu ve Paket Akışının Mühendislik Mantığı</title>
-      <link>http://localhost:1313/tr/labnotes/l2-l3/l2-l3/</link>
+      <link>http://localhost:1313/tr/labnotes/l2-l3/</link>
       <pubDate>Wed, 05 Aug 2026 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/tr/labnotes/l2-l3/l2-l3/</guid>
+      <guid>http://localhost:1313/tr/labnotes/l2-l3/</guid>
       <description>Düz bir Katman 2 ağının donanımsal ve mantıksal limitleri, Katman 3 anahtarlamanın (L3 Switching) nasıl çalıştığı ve bir paketin iki katman arasında geçerken yaşadığı dönüşüm, mühendislik perspektifinden.</description>
-      
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:1313/labnotes/l2-l3/feature.png" />
     </item>
     
     <item>
       <title>Mühendisler İçin Kapsamlı Cloud Computing 101 Rehberi</title>
       <link>http://localhost:1313/tr/labnotes/cloud-computing/</link>
-      <pubDate>Sat, 01 Aug 2026 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 01 Jul 2026 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/tr/labnotes/cloud-computing/</guid>
       <description>Geleneksel veri merkezlerinden modern bulut mimarilerine derinlemesine geçiş. Mimari bileşenler, yazılım tanımlı ağ (SDN), VPC tasarımı, güvenlik ve Infrastructure as Code (IaC) prensipleri.</description>

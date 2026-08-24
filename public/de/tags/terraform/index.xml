@@ -7,12 +7,12 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>de</language>
     <copyright>© 2026 Algan Ayzit</copyright>
-    <lastBuildDate>Sat, 01 Aug 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/de/tags/terraform/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Wed, 01 Jul 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/de/tags/terraform/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Ein umfassender Cloud-Computing-101-Leitfaden für Ingenieure</title>
       <link>http://localhost:1313/de/labnotes/cloud-computing/</link>
-      <pubDate>Sat, 01 Aug 2026 00:00:00 +0000</pubDate>
+      <pubDate>Wed, 01 Jul 2026 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/de/labnotes/cloud-computing/</guid>
       <description>Ein tiefgehender Blick auf den Wandel von traditionellen Rechenzentren zu modernen Cloud-Architekturen. Architekturkomponenten, Software-Defined Networking (SDN), VPC-Design, Sicherheit und die Prinzipien von Infrastructure as Code (IaC).</description>

@@ -11,12 +11,12 @@
     
     <item>
       <title>Layer 2 vs. Layer 3 Switching: Die technische Logik hinter Netzwerksegmentierung und Paketfluss</title>
-      <link>http://localhost:1313/de/labnotes/l2-l3/l2-l3/</link>
+      <link>http://localhost:1313/de/labnotes/l2-l3/</link>
       <pubDate>Wed, 05 Aug 2026 00:00:00 +0000</pubDate>
       
-      <guid>http://localhost:1313/de/labnotes/l2-l3/l2-l3/</guid>
+      <guid>http://localhost:1313/de/labnotes/l2-l3/</guid>
       <description>Die hardwareseitigen und logischen Grenzen eines flachen Layer-2-Netzwerks, die Funktionsweise von Layer-3-Switching (L3 Switching) und die Transformation, die ein Paket beim Übergang zwischen den beiden Schichten durchläuft – aus technischer Perspektive.</description>
-      
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:1313/labnotes/l2-l3/feature.png" />
     </item>
     
   </channel>
