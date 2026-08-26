@@ -7,14 +7,74 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>de</language>
     <copyright>© 2026 Algan Ayzit</copyright>
-    <lastBuildDate>Wed, 05 Aug 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/de/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 24 Aug 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/de/tags/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>L2</title>
       <link>http://localhost:1313/de/tags/l2/</link>
-      <pubDate>Wed, 05 Aug 2026 00:00:00 +0000</pubDate>
+      <pubDate>Mon, 24 Aug 2026 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/de/tags/l2/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>MST</title>
+      <link>http://localhost:1313/de/tags/mst/</link>
+      <pubDate>Mon, 24 Aug 2026 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/de/tags/mst/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Networking</title>
+      <link>http://localhost:1313/de/tags/networking/</link>
+      <pubDate>Mon, 24 Aug 2026 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/de/tags/networking/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>RSTP</title>
+      <link>http://localhost:1313/de/tags/rstp/</link>
+      <pubDate>Mon, 24 Aug 2026 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/de/tags/rstp/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Security</title>
+      <link>http://localhost:1313/de/tags/security/</link>
+      <pubDate>Mon, 24 Aug 2026 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/de/tags/security/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>STP</title>
+      <link>http://localhost:1313/de/tags/stp/</link>
+      <pubDate>Mon, 24 Aug 2026 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/de/tags/stp/</guid>
+      <description></description>
+      
+    </item>
+    
+    <item>
+      <title>Switching</title>
+      <link>http://localhost:1313/de/tags/switching/</link>
+      <pubDate>Mon, 24 Aug 2026 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/de/tags/switching/</guid>
       <description></description>
       
     </item>
@@ -30,41 +90,11 @@
     </item>
     
     <item>
-      <title>Networking</title>
-      <link>http://localhost:1313/de/tags/networking/</link>
-      <pubDate>Wed, 05 Aug 2026 00:00:00 +0000</pubDate>
-      
-      <guid>http://localhost:1313/de/tags/networking/</guid>
-      <description></description>
-      
-    </item>
-    
-    <item>
       <title>Routing</title>
       <link>http://localhost:1313/de/tags/routing/</link>
       <pubDate>Wed, 05 Aug 2026 00:00:00 +0000</pubDate>
       
       <guid>http://localhost:1313/de/tags/routing/</guid>
-      <description></description>
-      
-    </item>
-    
-    <item>
-      <title>Security</title>
-      <link>http://localhost:1313/de/tags/security/</link>
-      <pubDate>Wed, 05 Aug 2026 00:00:00 +0000</pubDate>
-      
-      <guid>http://localhost:1313/de/tags/security/</guid>
-      <description></description>
-      
-    </item>
-    
-    <item>
-      <title>Switching</title>
-      <link>http://localhost:1313/de/tags/switching/</link>
-      <pubDate>Wed, 05 Aug 2026 00:00:00 +0000</pubDate>
-      
-      <guid>http://localhost:1313/de/tags/switching/</guid>
       <description></description>
       
     </item>

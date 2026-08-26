@@ -9,7 +9,17 @@
     <managingEditor>alganayzit@gmail.com (Algan Ayzit)</managingEditor>
     <webMaster>alganayzit@gmail.com (Algan Ayzit)</webMaster>
     <copyright>© 2026 Algan Ayzit</copyright>
-    <lastBuildDate>Wed, 05 Aug 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/security/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 24 Aug 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tags/security/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Spanning Tree Protocol (STP) and the Architecture of Layer 2 Loop Prevention</title>
+      <link>http://localhost:1313/labnotes/stp-loop-preventation/</link>
+      <pubDate>Mon, 24 Aug 2026 00:00:00 +0000</pubDate>
+      <author>alganayzit@gmail.com (Algan Ayzit)</author>
+      <guid>http://localhost:1313/labnotes/stp-loop-preventation/</guid>
+      <description>From Root Bridge election to port cost calculations, from STP&amp;rsquo;s timers to RSTP&amp;rsquo;s rapid convergence, from PVST+/MST to where STP stands in modern spine-leaf architectures — the engineering detail behind Layer 2 loop prevention.</description>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:1313/labnotes/stp-loop-preventation/feature.png" />
+    </item>
     
     <item>
       <title>Layer 2 vs. Layer 3 Switching: The Engineering Logic Behind Network Segmentation and Packet Flow</title>

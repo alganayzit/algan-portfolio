@@ -7,7 +7,17 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>tr</language>
     <copyright>© 2026 Algan Ayzit</copyright>
-    <lastBuildDate>Wed, 05 Aug 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tr/categories/networking/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 24 Aug 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/tr/categories/networking/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Spanning Tree Protocol (STP) ve Katman 2 Döngü Engelleme Mimarisi</title>
+      <link>http://localhost:1313/tr/labnotes/stp-loop-preventation/</link>
+      <pubDate>Mon, 24 Aug 2026 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/tr/labnotes/stp-loop-preventation/</guid>
+      <description>Root Bridge seçiminden port maliyetlerine, STP zamanlayıcılarından RSTP&amp;rsquo;nin hızlı yakınsama mekanizmasına, PVST+/MST&amp;rsquo;ten modern spine-leaf mimarilerde STP&amp;rsquo;nin yerine kadar Katman 2 döngü engellemenin mühendislik detayları.</description>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:1313/labnotes/stp-loop-preventation/feature.png" />
+    </item>
     
     <item>
       <title>Katman 2 vs. Katman 3 Anahtarlama: Ağ Segmentasyonu ve Paket Akışının Mühendislik Mantığı</title>

@@ -7,7 +7,17 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>de</language>
     <copyright>© 2026 Algan Ayzit</copyright>
-    <lastBuildDate>Wed, 05 Aug 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/de/tags/security/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 24 Aug 2026 00:00:00 +0000</lastBuildDate><atom:link href="http://localhost:1313/de/tags/security/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Spanning Tree Protocol (STP) und die Architektur der Layer-2-Schleifenvermeidung</title>
+      <link>http://localhost:1313/de/labnotes/stp-loop-preventation/</link>
+      <pubDate>Mon, 24 Aug 2026 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/de/labnotes/stp-loop-preventation/</guid>
+      <description>Von der Root-Bridge-Wahl über die Berechnung der Port-Kosten, von den STP-Timern bis zur schnellen Konvergenz von RSTP, von PVST+/MST bis zur Rolle von STP in modernen Spine-Leaf-Architekturen – die technischen Details hinter der Layer-2-Schleifenvermeidung.</description>
+      <media:content xmlns:media="http://search.yahoo.com/mrss/" url="http://localhost:1313/labnotes/stp-loop-preventation/feature.png" />
+    </item>
     
     <item>
       <title>Layer 2 vs. Layer 3 Switching: Die technische Logik hinter Netzwerksegmentierung und Paketfluss</title>

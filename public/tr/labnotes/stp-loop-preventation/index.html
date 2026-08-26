@@ -1,0 +1,1242 @@
+<!doctype html>
+<html
+  lang="tr"
+  dir="ltr"
+  class="scroll-smooth"
+  data-default-appearance="light"
+  data-auto-appearance="true"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <meta charset="utf-8">
+  
+    <meta http-equiv="content-language" content="tr">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="theme-color">
+
+  
+  
+    <title>Spanning Tree Protocol (STP) ve Katman 2 Döngü Engelleme Mimarisi &middot; Algan Ayzit</title>
+    <meta name="title" content="Spanning Tree Protocol (STP) ve Katman 2 Döngü Engelleme Mimarisi &middot; Algan Ayzit">
+  
+
+  
+  
+  
+  
+  
+    
+  
+    
+  
+    
+  
+  
+    <meta name="description" content="Root Bridge seçiminden port maliyetlerine, STP zamanlayıcılarından RSTP&#39;nin hızlı yakınsama mekanizmasına, PVST&#43;/MST&#39;ten modern spine-leaf mimarilerde STP&#39;nin yerine kadar Katman 2 döngü engellemenin mühendislik detayları.">
+  
+  
+    <meta name="keywords" content="Networking,STP,RSTP,MST,Switching,L2,Security,">
+  
+  
+  
+  <link rel="canonical" href="http://localhost:1313/tr/labnotes/stp-loop-preventation/">
+  
+    
+      
+      
+        <link rel="alternate" hreflang="en" href="http://localhost:1313/labnotes/stp-loop-preventation/">
+      
+    
+      
+      
+        <link rel="alternate" hreflang="tr" href="http://localhost:1313/tr/labnotes/stp-loop-preventation/">
+      
+    
+      
+      
+        <link rel="alternate" hreflang="de" href="http://localhost:1313/de/labnotes/stp-loop-preventation/">
+      
+    
+  
+  
+
+  
+  
+    <meta name="author" content="Algan Ayzit">
+  
+  
+    
+      
+        
+          <link href="https://github.com/alganayzit" rel="me">
+        
+      
+    
+      
+        
+          <link href="https://www.linkedin.com/in/algan-ayzit-472726224" rel="me">
+        
+      
+    
+  
+
+  
+  <meta property="og:url" content="http://localhost:1313/tr/labnotes/stp-loop-preventation/">
+	<meta property="og:site_name" content="Algan Ayzit">
+	<meta property="og:title" content="Spanning Tree Protocol (STP) ve Katman 2 Döngü Engelleme Mimarisi">
+	<meta property="og:description" content="Root Bridge seçiminden port maliyetlerine, STP zamanlayıcılarından RSTP’nin hızlı yakınsama mekanizmasına, PVST&#43;/MST’ten modern spine-leaf mimarilerde STP’nin yerine kadar Katman 2 döngü engellemenin mühendislik detayları.">
+	<meta property="og:locale" content="tr">
+	<meta property="og:type" content="article">
+		<meta property="article:section" content="labnotes">
+		<meta property="article:published_time" content="2026-08-24T00:00:00+00:00">
+		<meta property="article:modified_time" content="2026-08-24T00:00:00+00:00">
+		<meta property="article:tag" content="Networking">
+		<meta property="article:tag" content="STP">
+		<meta property="article:tag" content="RSTP">
+		<meta property="article:tag" content="MST">
+		<meta property="article:tag" content="Switching">
+		<meta property="article:tag" content="L2">
+		<meta property="og:image" content="http://localhost:1313/labnotes/stp-loop-preventation/feature.png">
+
+  
+	<meta name="twitter:card" content="summary_large_image">
+	<meta name="twitter:image" content="http://localhost:1313/labnotes/stp-loop-preventation/feature.png">
+	<meta name="twitter:title" content="Spanning Tree Protocol (STP) ve Katman 2 Döngü Engelleme Mimarisi">
+	<meta name="twitter:description" content="Root Bridge seçiminden port maliyetlerine, STP zamanlayıcılarından RSTP’nin hızlı yakınsama mekanizmasına, PVST&#43;/MST’ten modern spine-leaf mimarilerde STP’nin yerine kadar Katman 2 döngü engellemenin mühendislik detayları.">
+
+  
+  
+  
+  
+    
+      
+    
+  
+    
+      
+    
+  
+    
+      
+    
+  
+  
+    
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+  
+  
+  
+  
+  
+  
+  
+    
+  
+  
+  <link
+    type="text/css"
+    rel="stylesheet"
+    href="/css/main.bundle.min.d8968b5074e51f1df2a14d9e8ab8071f02e54104fdf2df960e0484275b9fe02a27f22b633a79d5a05580f363a0119fb7304eb8d4c358fb0a6760875471fafd61.css"
+    integrity="sha512-2JaLUHTlHx3yoU2eirgHHwLlQQT98t&#43;WDgSEJ1uf4Con8itjOnnVoFWA82OgEZ&#43;3ME641MNY&#43;wpnYIdUcfr9YQ==">
+
+  
+  
+  <script
+    type="text/javascript"
+    src="/js/appearance.min.6f41174b3a05b680820fe08cadbfa5fb7a7ca347b76a0955cdc68b9d8aca1ce24f0547e138cea33bcc7904d551a90afcb1cc7f2d9fe8557075d501419046c08c.js"
+    integrity="sha512-b0EXSzoFtoCCD&#43;CMrb&#43;l&#43;3p8o0e3aglVzcaLnYrKHOJPBUfhOM6jO8x5BNVRqQr8scx/LZ/oVXB11QFBkEbAjA=="></script>
+  
+  
+  
+  
+  
+  
+    
+    <script src="/lib/zoom/zoom.min.umd.a527109b68c082a70f3697716dd72a9d5aa8b545cf800cecbbc7399f2ca6f6e0ce3e431f2062b48bbfa47c9ea42822714060bef309be073f49b9c0e30d318d7b.js" integrity="sha512-pScQm2jAgqcPNpdxbdcqnVqotUXPgAzsu8c5nyym9uDOPkMfIGK0i7&#43;kfJ6kKCJxQGC&#43;8wm&#43;Bz9JucDjDTGNew=="></script>
+  
+
+  
+  
+  
+    
+  
+  
+    
+    
+    
+  
+  
+  
+  
+  
+  
+  
+    
+    <script
+      defer
+      type="text/javascript"
+      id="script-bundle"
+      src="/js/main.bundle.min.2e4a40a56a1c26644ff4dab6790eabc19d06af6171ea5b7ce1d008ad294537fedc437e8d1b2d28ae15b50ecb35defd0e442ddca3a21cb41b95435b3f03fd29fd.js"
+      integrity="sha512-LkpApWocJmRP9Nq2eQ6rwZ0Gr2Fx6lt84dAIrSlFN/7cQ36NGy0orhW1Dss13v0ORC3co6IctBuVQ1s/A/0p/Q=="
+      data-copy="Kopyala"
+      data-copied="Kopyalandı"></script>
+  
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+  
+
+  
+  <script type="application/ld+json">
+  [{
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "articleSection": "Laboratuvar Notları",
+    "name": "Spanning Tree Protocol (STP) ve Katman 2 Döngü Engelleme Mimarisi",
+    "headline": "Spanning Tree Protocol (STP) ve Katman 2 Döngü Engelleme Mimarisi",
+    
+    "inLanguage": "tr",
+    "url" : "http://localhost:1313/tr/labnotes/stp-loop-preventation/",
+    "author" : {
+      "@type": "Person",
+      "name": "Algan Ayzit"
+    },
+    "copyrightYear": "2026",
+    "dateCreated": "2026-08-24T00:00:00\u002b00:00",
+    "datePublished": "2026-08-24T00:00:00\u002b00:00",
+    
+    "dateModified": "2026-08-24T00:00:00\u002b00:00",
+    
+    "keywords": ["Networking","STP","RSTP","MST","Switching","L2","Security"],
+    
+    "mainEntityOfPage": "true",
+    "wordCount": "1464"
+  }]
+  </script>
+
+
+
+  
+  
+
+  
+  
+
+  
+  
+
+  
+  
+</head>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <body class="flex flex-col h-screen m-auto leading-7 max-w-7xl px-6 sm:px-14 md:px-24 lg:px-32 text-lg bg-neutral text-neutral-900 dark:bg-neutral-800 dark:text-neutral bf-scrollbar">
+    <div id="the-top" class="absolute flex self-center">
+      <a
+        class="px-3 py-1 text-sm -translate-y-8 rounded-b-lg bg-primary-200 focus:translate-y-0 dark:bg-neutral-600"
+        href="#main-content">
+        <span class="font-bold text-primary-600 pe-2 dark:text-primary-400">&darr;</span>
+        Ana içeriğe geç
+      </a>
+    </div>
+    
+    
+      <div class="main-menu flex items-center w-full gap-2 p-1 pl-0">
+  
+  
+    <a href="/tr/" class="text-base font-medium truncate min-w-0 shrink">
+      Algan Ayzit
+    </a>
+  
+  <div class="flex items-center ms-auto">
+    <div class="hidden md:flex">
+      <nav class="flex items-center gap-x-5 h-12">
+  
+    
+      
+  
+    <a
+      href="/tr/about/"
+      
+      class="flex items-center bf-icon-color-hover"
+      aria-label="Hakkımda"
+      title="">
+      
+      
+        <span class="text-base font-medium break-normal">
+          Hakkımda
+        </span>
+      
+    </a>
+  
+
+    
+      
+  
+    <a
+      href="/tr/labnotes/"
+      
+      class="flex items-center bf-icon-color-hover"
+      aria-label="Laboratuvar Notları"
+      title="Laboratuvar Notları">
+      
+      
+        <span class="text-base font-medium break-normal">
+          Laboratuvar Notları
+        </span>
+      
+    </a>
+  
+
+    
+      
+  
+    <a
+      href="/tr/projects/"
+      
+      class="flex items-center bf-icon-color-hover"
+      aria-label="Projeler"
+      title="Projeler">
+      
+      
+        <span class="text-base font-medium break-normal">
+          Projeler
+        </span>
+      
+    </a>
+  
+
+    
+  
+
+  
+  <div class="translation nested-menu">
+    <button class="cursor-pointer flex items-center">
+      <span class="me-1">
+        <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+    <path fill="currentColor" d="M0 128C0 92.7 28.7 64 64 64H256h48 16H576c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H320 304 256 64c-35.3 0-64-28.7-64-64V128zm320 0V384H576V128H320zM178.3 175.9c-3.2-7.2-10.4-11.9-18.3-11.9s-15.1 4.7-18.3 11.9l-64 144c-4.5 10.1 .1 21.9 10.2 26.4s21.9-.1 26.4-10.2l8.9-20.1h73.6l8.9 20.1c4.5 10.1 16.3 14.6 26.4 10.2s14.6-16.3 10.2-26.4l-64-144zM160 233.2L179 276H141l19-42.8zM448 164c11 0 20 9 20 20v4h44 16c11 0 20 9 20 20s-9 20-20 20h-2l-1.6 4.5c-8.9 24.4-22.4 46.6-39.6 65.4c.9 .6 1.8 1.1 2.7 1.6l18.9 11.3c9.5 5.7 12.5 18 6.9 27.4s-18 12.5-27.4 6.9l-18.9-11.3c-4.5-2.7-8.8-5.5-13.1-8.5c-10.6 7.5-21.9 14-34 19.4l-3.6 1.6c-10.1 4.5-21.9-.1-26.4-10.2s.1-21.9 10.2-26.4l3.6-1.6c6.4-2.9 12.6-6.1 18.5-9.8l-12.2-12.2c-7.8-7.8-7.8-20.5 0-28.3s20.5-7.8 28.3 0l14.6 14.6 .5 .5c12.4-13.1 22.5-28.3 29.8-45H448 376c-11 0-20-9-20-20s9-20 20-20h52v-4c0-11 9-20 20-20z"/></svg></span>
+      </span>
+      <span class="text-sm font-medium bf-icon-color-hover" title="Spanning Tree Protocol (STP) ve Katman 2 Döngü Engelleme Mimarisi">TR</span>
+    </button>
+    <ul class="menuhide">
+      <li class="rounded-xl backdrop-blur shadow-2xl p-2 flex flex-col gap-1">
+        
+          <a href="/labnotes/stp-loop-preventation/" class="flex items-center bf-icon-color-hover px-3 py-1">
+            <span class="text-sm font-sm" title="Spanning Tree Protocol (STP) and the Architecture of Layer 2 Loop Prevention">
+              EN
+            </span>
+          </a>
+        
+          <a href="/tr/labnotes/stp-loop-preventation/" class="flex items-center bf-icon-color-hover px-3 py-1">
+            <span class="text-sm font-sm" title="Spanning Tree Protocol (STP) ve Katman 2 Döngü Engelleme Mimarisi">
+              TR
+            </span>
+          </a>
+        
+          <a href="/de/labnotes/stp-loop-preventation/" class="flex items-center bf-icon-color-hover px-3 py-1">
+            <span class="text-sm font-sm" title="Spanning Tree Protocol (STP) und die Architektur der Layer-2-Schleifenvermeidung">
+              DE
+            </span>
+          </a>
+        
+      </li>
+    </ul>
+  </div>
+
+
+  
+
+  
+    <button
+      id="search-button"
+      aria-label="Search"
+      class="text-base bf-icon-color-hover"
+      title="Ara (/)">
+      <span class="relative block icon"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+</span>
+    </button>
+  
+
+  
+    <div class="flex items-center">
+      <button
+        id="appearance-switcher"
+        aria-label="Dark mode switcher"
+        type="button"
+        class="text-base bf-icon-color-hover">
+        <div class="flex items-center justify-center dark:hidden">
+          <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M32 256c0-123.8 100.3-224 223.8-224c11.36 0 29.7 1.668 40.9 3.746c9.616 1.777 11.75 14.63 3.279 19.44C245 86.5 211.2 144.6 211.2 207.8c0 109.7 99.71 193 208.3 172.3c9.561-1.805 16.28 9.324 10.11 16.95C387.9 448.6 324.8 480 255.8 480C132.1 480 32 379.6 32 256z"/></svg>
+</span>
+        </div>
+        <div class="items-center justify-center hidden dark:flex">
+          <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 159.1c-53.02 0-95.1 42.98-95.1 95.1S202.1 351.1 256 351.1s95.1-42.98 95.1-95.1S309 159.1 256 159.1zM509.3 347L446.1 255.1l63.15-91.01c6.332-9.125 1.104-21.74-9.826-23.72l-109-19.7l-19.7-109c-1.975-10.93-14.59-16.16-23.72-9.824L256 65.89L164.1 2.736c-9.125-6.332-21.74-1.107-23.72 9.824L121.6 121.6L12.56 141.3C1.633 143.2-3.596 155.9 2.736 164.1L65.89 256l-63.15 91.01c-6.332 9.125-1.105 21.74 9.824 23.72l109 19.7l19.7 109c1.975 10.93 14.59 16.16 23.72 9.824L256 446.1l91.01 63.15c9.127 6.334 21.75 1.107 23.72-9.822l19.7-109l109-19.7C510.4 368.8 515.6 356.1 509.3 347zM256 383.1c-70.69 0-127.1-57.31-127.1-127.1c0-70.69 57.31-127.1 127.1-127.1s127.1 57.3 127.1 127.1C383.1 326.7 326.7 383.1 256 383.1z"/></svg>
+</span>
+        </div>
+      </button>
+    </div>
+  
+</nav>
+
+
+
+    </div>
+    <div class="flex md:hidden">
+      <div class="flex items-center h-14 gap-4">
+  
+    <button
+      id="search-button-mobile"
+      aria-label="Search"
+      class="flex items-center justify-center bf-icon-color-hover"
+      title="Ara (/)">
+      <span class="relative block icon"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+</span>
+    </button>
+  
+
+  
+    <button
+      id="appearance-switcher-mobile"
+      type="button"
+      aria-label="Dark mode switcher"
+      class="flex items-center justify-center text-neutral-900 hover:text-primary-600 dark:text-neutral-200 dark:hover:text-primary-400">
+      <div class="dark:hidden">
+        <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M32 256c0-123.8 100.3-224 223.8-224c11.36 0 29.7 1.668 40.9 3.746c9.616 1.777 11.75 14.63 3.279 19.44C245 86.5 211.2 144.6 211.2 207.8c0 109.7 99.71 193 208.3 172.3c9.561-1.805 16.28 9.324 10.11 16.95C387.9 448.6 324.8 480 255.8 480C132.1 480 32 379.6 32 256z"/></svg>
+</span>
+      </div>
+      <div class="hidden dark:block">
+        <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M256 159.1c-53.02 0-95.1 42.98-95.1 95.1S202.1 351.1 256 351.1s95.1-42.98 95.1-95.1S309 159.1 256 159.1zM509.3 347L446.1 255.1l63.15-91.01c6.332-9.125 1.104-21.74-9.826-23.72l-109-19.7l-19.7-109c-1.975-10.93-14.59-16.16-23.72-9.824L256 65.89L164.1 2.736c-9.125-6.332-21.74-1.107-23.72 9.824L121.6 121.6L12.56 141.3C1.633 143.2-3.596 155.9 2.736 164.1L65.89 256l-63.15 91.01c-6.332 9.125-1.105 21.74 9.824 23.72l109 19.7l19.7 109c1.975 10.93 14.59 16.16 23.72 9.824L256 446.1l91.01 63.15c9.127 6.334 21.75 1.107 23.72-9.822l19.7-109l109-19.7C510.4 368.8 515.6 356.1 509.3 347zM256 383.1c-70.69 0-127.1-57.31-127.1-127.1c0-70.69 57.31-127.1 127.1-127.1s127.1 57.3 127.1 127.1C383.1 326.7 326.7 383.1 256 383.1z"/></svg>
+</span>
+      </div>
+    </button>
+  
+
+  
+    <input type="checkbox" id="mobile-menu-toggle" autocomplete="off" class="hidden peer">
+    <label for="mobile-menu-toggle" class="flex items-center justify-center cursor-pointer bf-icon-color-hover">
+      <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M0 96C0 78.33 14.33 64 32 64H416C433.7 64 448 78.33 448 96C448 113.7 433.7 128 416 128H32C14.33 128 0 113.7 0 96zM0 256C0 238.3 14.33 224 32 224H416C433.7 224 448 238.3 448 256C448 273.7 433.7 288 416 288H32C14.33 288 0 273.7 0 256zM416 448H32C14.33 448 0 433.7 0 416C0 398.3 14.33 384 32 384H416C433.7 384 448 398.3 448 416C448 433.7 433.7 448 416 448z"/></svg>
+</span>
+    </label>
+
+    <div
+      role="dialog"
+      aria-modal="true"
+      style="scrollbar-gutter: stable;"
+      class="fixed inset-0 z-50 invisible overflow-y-auto px-6 py-20 opacity-0 transition-[opacity,visibility] duration-300 peer-checked:visible peer-checked:opacity-100 bg-neutral-50/97 dark:bg-neutral-900/99
+      bf-scrollbar">
+      <label
+        for="mobile-menu-toggle"
+        class="fixed end-8 top-5 flex items-center justify-center z-50 h-12 w-12 cursor-pointer select-none rounded-full bf-icon-color-hover border bf-border-color bf-border-color-hover bg-neutral-50 dark:bg-neutral-900">
+        <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg>
+</span>
+      </label>
+      <nav class="mx-auto max-w-md space-y-6">
+        
+  
+    
+    <div class="px-2">
+      <a
+        href="/tr/about/"
+        aria-label="Hakkımda"
+        
+        class="flex items-center gap-4 group bf-icon-color-hover text-neutral-700 dark:text-neutral-200">
+        
+        <span title="" class="text-2xl font-bold tracking-tight">
+          Hakkımda
+        </span>
+        
+      </a>
+
+      
+    </div>
+  
+    
+    <div class="px-2">
+      <a
+        href="/tr/labnotes/"
+        aria-label="Laboratuvar Notları"
+        
+        class="flex items-center gap-4 group bf-icon-color-hover text-neutral-700 dark:text-neutral-200">
+        
+        <span title="Laboratuvar Notları" class="text-2xl font-bold tracking-tight">
+          Laboratuvar Notları
+        </span>
+        
+      </a>
+
+      
+    </div>
+  
+    
+    <div class="px-2">
+      <a
+        href="/tr/projects/"
+        aria-label="Projeler"
+        
+        class="flex items-center gap-4 group bf-icon-color-hover text-neutral-700 dark:text-neutral-200">
+        
+        <span title="Projeler" class="text-2xl font-bold tracking-tight">
+          Projeler
+        </span>
+        
+      </a>
+
+      
+    </div>
+  
+
+        
+  
+
+        
+  
+    <div
+      class="flex flex-wrap items-center [&_span]:text-2xl [&_.translation_button_.icon]:text-4xl! [&_.translation_button_span]:text-base! [&_.translation_.menuhide_span]:text-sm! gap-x-6 ps-2 mt-8 pt-8 border-t bf-border-color">
+      
+  <div class="translation nested-menu">
+    <button class="cursor-pointer flex items-center">
+      <span class="me-1">
+        <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512">
+    <path fill="currentColor" d="M0 128C0 92.7 28.7 64 64 64H256h48 16H576c35.3 0 64 28.7 64 64V384c0 35.3-28.7 64-64 64H320 304 256 64c-35.3 0-64-28.7-64-64V128zm320 0V384H576V128H320zM178.3 175.9c-3.2-7.2-10.4-11.9-18.3-11.9s-15.1 4.7-18.3 11.9l-64 144c-4.5 10.1 .1 21.9 10.2 26.4s21.9-.1 26.4-10.2l8.9-20.1h73.6l8.9 20.1c4.5 10.1 16.3 14.6 26.4 10.2s14.6-16.3 10.2-26.4l-64-144zM160 233.2L179 276H141l19-42.8zM448 164c11 0 20 9 20 20v4h44 16c11 0 20 9 20 20s-9 20-20 20h-2l-1.6 4.5c-8.9 24.4-22.4 46.6-39.6 65.4c.9 .6 1.8 1.1 2.7 1.6l18.9 11.3c9.5 5.7 12.5 18 6.9 27.4s-18 12.5-27.4 6.9l-18.9-11.3c-4.5-2.7-8.8-5.5-13.1-8.5c-10.6 7.5-21.9 14-34 19.4l-3.6 1.6c-10.1 4.5-21.9-.1-26.4-10.2s.1-21.9 10.2-26.4l3.6-1.6c6.4-2.9 12.6-6.1 18.5-9.8l-12.2-12.2c-7.8-7.8-7.8-20.5 0-28.3s20.5-7.8 28.3 0l14.6 14.6 .5 .5c12.4-13.1 22.5-28.3 29.8-45H448 376c-11 0-20-9-20-20s9-20 20-20h52v-4c0-11 9-20 20-20z"/></svg></span>
+      </span>
+      <span class="text-sm font-medium bf-icon-color-hover" title="Spanning Tree Protocol (STP) ve Katman 2 Döngü Engelleme Mimarisi">TR</span>
+    </button>
+    <ul class="menuhide">
+      <li class="rounded-xl backdrop-blur shadow-2xl p-2 flex flex-col gap-1">
+        
+          <a href="/labnotes/stp-loop-preventation/" class="flex items-center bf-icon-color-hover px-3 py-1">
+            <span class="text-sm font-sm" title="Spanning Tree Protocol (STP) and the Architecture of Layer 2 Loop Prevention">
+              EN
+            </span>
+          </a>
+        
+          <a href="/tr/labnotes/stp-loop-preventation/" class="flex items-center bf-icon-color-hover px-3 py-1">
+            <span class="text-sm font-sm" title="Spanning Tree Protocol (STP) ve Katman 2 Döngü Engelleme Mimarisi">
+              TR
+            </span>
+          </a>
+        
+          <a href="/de/labnotes/stp-loop-preventation/" class="flex items-center bf-icon-color-hover px-3 py-1">
+            <span class="text-sm font-sm" title="Spanning Tree Protocol (STP) und die Architektur der Layer-2-Schleifenvermeidung">
+              DE
+            </span>
+          </a>
+        
+      </li>
+    </ul>
+  </div>
+
+
+
+      
+    </div>
+  
+
+      </nav>
+    </div>
+  
+</div>
+
+
+
+
+
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+    
+    <div class="relative flex flex-col grow">
+      <main id="main-content" class="grow">
+        
+  
+  <article>
+    
+    
+
+    
+    <header id="single_header" class="mt-5 max-w-prose">
+      
+      <h1 class="mt-0 text-4xl font-extrabold text-neutral-900 dark:text-neutral">
+        Spanning Tree Protocol (STP) ve Katman 2 Döngü Engelleme Mimarisi
+      </h1>
+      <div class="mt-1 mb-6 text-base text-neutral-500 dark:text-neutral-400 print:hidden">
+        
+
+
+
+
+
+  
+  
+
+
+
+  
+
+  
+  
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+
+  
+    
+  
+
+  
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  <div class="flex flex-row flex-wrap items-center">
+    
+    
+      <time datetime="2026-08-24T00:00:00&#43;00:00">24 Ağustos 2026</time><span class="px-2 text-primary-500">&middot;</span><span>1464 kelime</span><span class="px-2 text-primary-500">&middot;</span><span title="Okuma süresi">7 dk</span>
+    
+
+    
+    
+  </div>
+
+  
+
+  
+  
+
+
+      </div>
+      
+        
+  
+  
+  
+  
+  
+  
+
+  
+
+  
+    
+    
+<div class="flex author">
+  
+  <div class="place-self-center">
+    
+      <div class="text-[0.6rem] uppercase leading-3 text-neutral-500 dark:text-neutral-400">
+        Yazar
+      </div>
+      <div class="font-semibold leading-6 text-neutral-800 dark:text-neutral-300">
+        Algan Ayzit
+      </div>
+    
+    
+      <div class="text-sm text-neutral-700 dark:text-neutral-400">Güvenli ağ altyapıları, bulut bilişim ve otomasyon teknolojileri üzerine çalışıyor.</div>
+    
+    <div class="text-2xl sm:text-lg">
+  <div class="flex flex-wrap text-neutral-400 dark:text-neutral-500 space-x-2">
+    
+      
+        
+        <a
+          class=" hover:text-primary-700 dark:hover:text-primary-400"
+          href="https://github.com/alganayzit"
+          
+          target="_blank"
+          aria-label="Github"
+          title="Github"
+          rel="me noopener noreferrer"
+          ><span class="inline-block align-text-bottom"><span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><path fill="currentColor" d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z"/></svg>
+</span></span></a
+        >
+      
+    
+      
+        
+        <a
+          class=" hover:text-primary-700 dark:hover:text-primary-400"
+          href="https://www.linkedin.com/in/algan-ayzit-472726224"
+          
+          target="_blank"
+          aria-label="Linkedin"
+          title="Linkedin"
+          rel="me noopener noreferrer"
+          ><span class="inline-block align-text-bottom"><span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+</span></span></a
+        >
+      
+    
+  </div>
+
+</div>
+  </div>
+</div>
+
+  
+
+  
+
+  
+    <div class="mb-5"></div>
+  
+
+      
+    </header>
+
+    
+    <section class="flex flex-col max-w-full mt-0 prose dark:prose-invert lg:flex-row">
+      
+      
+      
+      
+      
+
+
+      <div class="min-w-0 min-h-0 max-w-fit">
+        
+
+        <div class="article-content max-w-prose mb-20">
+          <figure><img
+    class="my-0 rounded-md"
+    loading="lazy"
+    decoding="async"
+    fetchpriority="auto"
+    alt="Stp"
+    width="2720"
+    height="1520"
+    src="/labnotes/stp-loop-preventation/feature_hu_330376226a1b4a67.png"
+    srcset="/labnotes/stp-loop-preventation/feature_hu_330376226a1b4a67.png 800w, /labnotes/stp-loop-preventation/feature_hu_dadca75f347d35c0.png 1280w"
+    sizes="(min-width: 768px) 50vw, 65vw"
+    data-zoom-src="/labnotes/stp-loop-preventation/feature.png"></figure>
+
+<h2 class="relative group">Giriş
+    <div id="giriş" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#giri%c5%9f" aria-label="Anchor">#</a>
+    </span>
+    
+</h2>
+<p>Katman 2 (Data Link) ağlarda yedeklilik (redundancy) sağlamak için fiziksel olarak birden fazla kablo veya switch bağlantısı kurmak şarttır. Ancak IP başlığındaki gibi bir TTL (Time to Live) alanı Ethernet başlığında bulunmaz. Bu durum, yedekli bir Katman 2 ağında döngü (loop) oluştuğunda broadcast paketlerinin sonsuza kadar dönmesine, MAC adres tablolarının bozulmasına ve tüm ağın kilitlenmesine (Broadcast Storm) yol açar.</p>
+<p>STP (IEEE 802.1D) ve onun daha hızlı versiyonu olan RSTP (IEEE 802.1w), ağdaki fiziksel döngüleri tespit ederek mantıksal olarak belirli portları engelleme (blocking) durumuna getirir.</p>
+<hr>
+
+<h2 class="relative group">1. Root Bridge Seçim Mekanizması
+    <div id="1-root-bridge-seçim-mekanizması" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#1-root-bridge-se%c3%a7im-mekanizmas%c4%b1" aria-label="Anchor">#</a>
+    </span>
+    
+</h2>
+<p>STP topolojisinin merkezinde bir <strong>Root Bridge</strong> bulunur. Ağdaki tüm switch&rsquo;ler birbirlerine <strong>BPDU (Bridge Protocol Data Unit)</strong> paketleri göndererek Root Bridge&rsquo;i seçer.</p>
+<p>Seçim kriteri en düşük <strong>Bridge ID (BID)</strong> değerine sahip switch&rsquo;tir. BID, sanıldığının aksine sadece iki değil, üç bileşenden oluşur:</p>
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">Bridge ID = Priority + Extended System ID (VLAN ID) + MAC Adresi</span></span></code></pre></div></div>
+<ul>
+<li><strong>Priority:</strong> Varsayılan değeri <strong>32768</strong>&lsquo;dir, 4096&rsquo;lık artışlarla manuel olarak ayarlanabilir.</li>
+<li><strong>Extended System ID:</strong> PVST+ ortamında her VLAN&rsquo;a ait ayrı bir STP instance&rsquo;ı çalıştığı için, bu alan gönderilen BPDU&rsquo;nun hangi VLAN&rsquo;a ait olduğunu belirtir ve Priority değerine dahil edilir.</li>
+<li><strong>MAC Adresi:</strong> Öncelik değerleri eşitse, en düşük MAC adresine sahip switch Root Bridge olur.</li>
+</ul>
+<p>İdeal bir ağ tasarımında Root Bridge seçimi şansa bırakılmaz; omurga (core) switch&rsquo;lerin öncelik değeri manuel olarak düşürülür (örneğin <strong>4096</strong> veya <strong>8192</strong>), ikincil bir Root Bridge adayı için ise bir kademe üstü değer (örneğin <strong>8192</strong> veya <strong>16384</strong>) atanır.</p>
+<hr>
+
+<h2 class="relative group">2. Port Rolleri, Durumları ve Path Cost
+    <div id="2-port-rolleri-durumları-ve-path-cost" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#2-port-rolleri-durumlar%c4%b1-ve-path-cost" aria-label="Anchor">#</a>
+    </span>
+    
+</h2>
+<p>Root Bridge seçildikten sonra ağdaki her switch portuna belirli roller atanır:</p>
+<ul>
+<li><strong>Root Port (RP):</strong> Root Bridge dışındaki her switch&rsquo;in Root Bridge&rsquo;e en kısa/en ucuz yoldan ulaşan portudur (switch başına 1 adet).</li>
+<li><strong>Designated Port (DP):</strong> Belirli bir ağ segmentinde trafiği iletmekten sorumlu porttur. Root Bridge üzerindeki tüm aktif portlar varsayılan olarak DP&rsquo;dir.</li>
+<li><strong>Alternate / Backup Port (AP/BP):</strong> Döngü oluşturmaması için trafik iletimine kapatılan (Blocking/Discarding) yedek portlardır.</li>
+</ul>
+<p>&ldquo;En ucuz yol&rdquo; ifadesi soyut değildir; STP bunu <strong>Path Cost</strong> değerleriyle sayısal olarak hesaplar. IEEE 802.1D&rsquo;nin güncellenen (kısa) maliyet tablosu şöyledir:</p>
+<table>
+	<thead>
+			<tr>
+					<th style="text-align: left">Bağlantı Hızı</th>
+					<th style="text-align: left">Path Cost (STP kısa değer)</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: left">10 Mbps</td>
+					<td style="text-align: left">100</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">100 Mbps</td>
+					<td style="text-align: left">19</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">1 Gbps</td>
+					<td style="text-align: left">4</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">10 Gbps</td>
+					<td style="text-align: left">2</td>
+			</tr>
+	</tbody>
+</table>
+<p>Bir switch, Root Bridge&rsquo;e giden her olası yolun toplam maliyetini (o yol üzerindeki tüm portların cost değerlerinin toplamı) hesaplar ve en düşük toplam maliyete sahip portu Root Port olarak seçer.</p>
+<hr>
+
+<h2 class="relative group">3. 802.1D STP vs. 802.1w RSTP Port Durumları
+    <div id="3-8021d-stp-vs-8021w-rstp-port-durumları" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#3-8021d-stp-vs-8021w-rstp-port-durumlar%c4%b1" aria-label="Anchor">#</a>
+    </span>
+    
+</h2>
+<p>Klasik STP&rsquo;de bir portun aktif hale geçmesi (Forwarding) 30 ila 50 saniye sürebilir. RSTP ise <strong>Proposal/Agreement</strong> el sıkışma (handshake) mekanizmasıyla bu süreyi milisaniyelere indirir.</p>
+<table>
+	<thead>
+			<tr>
+					<th style="text-align: left">802.1D STP Durumu</th>
+					<th style="text-align: left">802.1w RSTP Durumu</th>
+					<th style="text-align: center">MAC Öğrenme</th>
+					<th style="text-align: center">Trafik İletimi</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td style="text-align: left">Disabled</td>
+					<td style="text-align: left">Discarding</td>
+					<td style="text-align: center">Hayır</td>
+					<td style="text-align: center">Hayır</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">Blocking</td>
+					<td style="text-align: left">Discarding</td>
+					<td style="text-align: center">Hayır</td>
+					<td style="text-align: center">Hayır</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">Listening</td>
+					<td style="text-align: left">Discarding</td>
+					<td style="text-align: center">Hayır</td>
+					<td style="text-align: center">Hayır</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">Learning</td>
+					<td style="text-align: left">Learning</td>
+					<td style="text-align: center">Evet</td>
+					<td style="text-align: center">Hayır</td>
+			</tr>
+			<tr>
+					<td style="text-align: left">Forwarding</td>
+					<td style="text-align: left">Forwarding</td>
+					<td style="text-align: center">Evet</td>
+					<td style="text-align: center">Evet</td>
+			</tr>
+	</tbody>
+</table>
+<p>RSTP, port rollerine de iki yeni kavram ekler: <strong>Edge Port</strong> (PortFast&rsquo;e denk gelir, doğrudan son kullanıcı cihazına bağlı port) ve <strong>Alternate/Backup portların önceden hesaplanması</strong> — bir bağlantı koptuğunda RSTP, alternatif yolu STP gibi sıfırdan aramaz, zaten önceden belirlenmiş yedek portu anında devreye alır.</p>
+<hr>
+
+<h2 class="relative group">4. STP Zamanlayıcıları: 30-50 Saniyenin Kaynağı
+    <div id="4-stp-zamanlayıcıları-30-50-saniyenin-kaynağı" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#4-stp-zamanlay%c4%b1c%c4%b1lar%c4%b1-30-50-saniyenin-kayna%c4%9f%c4%b1" aria-label="Anchor">#</a>
+    </span>
+    
+</h2>
+<p>Klasik STP&rsquo;nin yavaşlığının nedeni rastgele değildir; üç zamanlayıcının toplamından gelir:</p>
+<ul>
+<li><strong>Hello Timer (2 sn):</strong> Root Bridge her 2 saniyede bir BPDU yayınlar.</li>
+<li><strong>Max Age (20 sn):</strong> Bir switch, komşusundan 20 saniye boyunca BPDU alamazsa topolojinin değiştiğini varsayar.</li>
+<li><strong>Forward Delay (15 sn × 2):</strong> Bir port, Listening ve Learning durumlarının her birinde 15&rsquo;er saniye bekler.</li>
+</ul>
+<p>Toplamda: <strong>Max Age (20 sn) + 2 × Forward Delay (2 × 15 sn) = 50 saniye</strong> en kötü senaryo yakınsama süresidir. Doğrudan komşu kaybı gibi daha iyi senaryolarda bu süre ~30 saniyeye iner.</p>
+<p>RSTP bu bekleme mantığını tamamen terk eder: komşu switch&rsquo;ler arasında <strong>Proposal/Agreement</strong> el sıkışması yapılır, her switch komşusunun senkron olduğunu doğrular doğrulamaz portu doğrudan Forwarding durumuna geçirir. Sonuç, çoğu topolojide 1 saniyenin altında yakınsama süresidir.</p>
+<hr>
+
+<h2 class="relative group">5. Yakınsama Senaryosu: Bir Bağlantı Koptuğunda Ne Olur?
+    <div id="5-yakınsama-senaryosu-bir-bağlantı-koptuğunda-ne-olur" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#5-yak%c4%b1nsama-senaryosu-bir-ba%c4%9flant%c4%b1-koptu%c4%9funda-ne-olur" aria-label="Anchor">#</a>
+    </span>
+    
+</h2>
+<p>Üç switch&rsquo;ten oluşan bir üçgen topolojiyi (SW1 = Root Bridge, SW2 ve SW3 birbirine ve Root&rsquo;a bağlı) ele alalım. SW2-SW3 arasındaki link Alternate/Blocking durumdaydı.</p>
+<ol>
+<li><strong>Link Kaybı Tespiti:</strong> SW1-SW2 arasındaki fiziksel bağlantı koparsa, SW2 doğrudan bunu algılar (fiziksel link-down sinyali).</li>
+<li><strong>Topology Change Notification (TCN):</strong> SW2, RSTP&rsquo;de doğrudan bir Topology Change BPDU&rsquo;sunu Root Bridge yönünde (veya STP&rsquo;de klasik TCN BPDU zincirini) yayınlar.</li>
+<li><strong>MAC Tablosu Flush:</strong> Topoloji değişikliği bilgisini alan tüm switch&rsquo;ler, MAC adres tablolarındaki eski yolları geçersiz kılar (STP&rsquo;de Forward Delay süresiyle, RSTP&rsquo;de anında).</li>
+<li><strong>Yeniden Hesaplama:</strong> SW2, artık Root Bridge&rsquo;e SW3 üzerinden ulaşabileceğini fark eder; SW2-SW3 arasındaki Alternate Port, Root Port&rsquo;a terfi eder.</li>
+<li><strong>Yeni Yolun Aktifleşmesi:</strong> RSTP&rsquo;de bu port, önceden zaten &ldquo;hazır&rdquo; (pre-computed) olduğu için milisaniyeler içinde Forwarding&rsquo;e geçer. Klasik STP&rsquo;de ise bu port Blocking → Listening → Learning → Forwarding aşamalarından tekrar geçmek zorunda kalır ve tam 30-50 saniyelik gecikme burada yaşanır.</li>
+</ol>
+<hr>
+
+<h2 class="relative group">6. PVST+, Rapid PVST+ ve MST
+    <div id="6-pvst-rapid-pvst-ve-mst" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#6-pvst-rapid-pvst-ve-mst" aria-label="Anchor">#</a>
+    </span>
+    
+</h2>
+<p>Yukarıdaki anlatım tek bir STP örneğini varsayar, ancak gerçek Cisco ortamlarında üç farklı çalışma modu bulunur:</p>
+<ul>
+<li><strong>PVST+ (Per-VLAN Spanning Tree Plus):</strong> Her VLAN için ayrı, bağımsız bir STP instance&rsquo;ı çalıştırır. Bu, VLAN başına farklı bir Root Bridge seçilebilmesine ve dolayısıyla trafiğin farklı linkler üzerinde load-balance edilmesine olanak tanır — örneğin VLAN 10 SW1&rsquo;i, VLAN 20 SW2&rsquo;yi Root Bridge olarak kullanabilir.</li>
+<li><strong>Rapid PVST+ (RPVST+):</strong> PVST+&lsquo;ın RSTP mantığıyla çalışan hızlı sürümüdür; Cisco&rsquo;nun günümüzde varsayılan olarak önerdiği moddur.</li>
+<li><strong>MST (Multiple Spanning Tree — IEEE 802.1s):</strong> Yüzlerce VLAN&rsquo;ın olduğu büyük ortamlarda her VLAN için ayrı instance çalıştırmak CPU açısından maliyetlidir. MST, birden fazla VLAN&rsquo;ı tek bir STP &ldquo;instance&quot;ında (region) gruplayarak bu yükü azaltır.</li>
+</ul>
+<hr>
+
+<h2 class="relative group">7. L2 Ağ Güvenliği ve Port Koruma Mekanizmaları
+    <div id="7-l2-ağ-güvenliği-ve-port-koruma-mekanizmaları" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#7-l2-a%c4%9f-g%c3%bcvenli%c4%9fi-ve-port-koruma-mekanizmalar%c4%b1" aria-label="Anchor">#</a>
+    </span>
+    
+</h2>
+<p>STP sadece döngü engellemekle kalmaz, doğru konfigürasyon yapılmadığında güvenlik zafiyeti de yaratabilir. Kötü niyetli bir cihaz ağa düşük Priority içeren BPDU&rsquo;lar göndererek kendini Root Bridge ilan edebilir. Bunun önüne geçmek için şu koruma mekanizmaları kullanılır:</p>
+<ul>
+<li><strong>PortFast:</strong> Sunucu veya PC gibi son kullanıcı cihazlarının bağlı olduğu portlarda Listening/Learning aşamalarını atlayarak portun anında Forwarding durumuna geçmesini sağlar.</li>
+<li><strong>BPDU Guard:</strong> PortFast tanımlı bir porta dışarıdan bir BPDU paketi gelirse (örneğin kullanıcı izinsiz bir switch bağlarsa), portu anında <strong>err-disable</strong> moduna alarak ağı korur.</li>
+<li><strong>Root Guard:</strong> Yetkisiz bir switch&rsquo;in ağın Root Bridge&rsquo;i olmasını engeller. Eğer tanımlı porttan daha iyi bir BPDU gelirse, o portu <strong>root-inconsistent</strong> durumuna getirip trafiği keser.</li>
+<li><strong>Loop Guard:</strong> Fiziksel bir hat hatası (tek yönlü bağlantı kaybı) durumunda Alternate portun yanlışlıkla Forwarding durumuna geçip döngü yaratmasını engeller.</li>
+</ul>
+<p>RSTP öncesinde, klasik STP&rsquo;nin 30-50 saniyelik yakınsama süresini kısaltmak için Cisco&rsquo;nun geliştirdiği iki tarihsel özellik de bu ailenin bir parçasıdır: <strong>UplinkFast</strong> (bir switch&rsquo;in doğrudan komşu linkini kaybettiğinde, yedek uplink&rsquo;e Forward Delay beklemeden geçmesini sağlar) ve <strong>BackboneFast</strong> (dolaylı bir link kaybını Max Age süresini beklemeden tespit eder). RSTP&rsquo;nin yaygınlaşmasıyla bu iki özellik büyük ölçüde gereksiz hale gelmiştir, çünkü RSTP aynı hızlı yakınsamayı standart olarak sağlar.</p>
+<hr>
+
+<h2 class="relative group">8. EtherChannel ile İlişkisi
+    <div id="8-etherchannel-ile-ilişkisi" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#8-etherchannel-ile-ili%c5%9fkisi" aria-label="Anchor">#</a>
+    </span>
+    
+</h2>
+<p>Fiziksel olarak birden fazla kabloyla bağlanan iki switch, STP açısından bir döngü riski taşır ve bu linklerden biri Blocking durumuna düşürülür. <strong>EtherChannel (Port Channel)</strong>, bu fiziksel bağlantıları tek bir mantıksal arayüzde birleştirir. STP, bir port-channel&rsquo;ı tek bir port olarak görür; dolayısıyla hem döngü oluşmaz hem de bağlı tüm fiziksel linkler aynı anda (load-balanced şekilde) aktif kalır. Bu, &ldquo;STP&rsquo;yi devre dışı bırakmadan&rdquo; bant genişliğini artırmanın standart yoludur.</p>
+<hr>
+
+<h2 class="relative group">9. Temel CLI Konfigürasyon Örneği
+    <div id="9-temel-cli-konfigürasyon-örneği" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#9-temel-cli-konfig%c3%bcrasyon-%c3%b6rne%c4%9fi" aria-label="Anchor">#</a>
+    </span>
+    
+</h2>
+<p>Cisco IOS üzerinde yukarıda anlatılan mekanizmaların pratikteki karşılığı aşağı yukarı şu komutlardır:</p>
+<div class="highlight-wrapper"><div class="highlight"><pre tabindex="0" class="chroma"><code class="language-text" data-lang="text"><span class="line"><span class="cl">! Root Bridge önceliğini manuel olarak düşürme (core switch üzerinde)
+</span></span><span class="line"><span class="cl">Switch(config)# spanning-tree vlan 10 priority 4096
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">! Rapid PVST+ modunu etkinleştirme
+</span></span><span class="line"><span class="cl">Switch(config)# spanning-tree mode rapid-pvst
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">! Son kullanıcı portunda PortFast + BPDU Guard
+</span></span><span class="line"><span class="cl">Switch(config)# interface fastEthernet 0/1
+</span></span><span class="line"><span class="cl">Switch(config-if)# spanning-tree portfast
+</span></span><span class="line"><span class="cl">Switch(config-if)# spanning-tree bpduguard enable
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">! Root Guard&#39;ı bir uplink portunda etkinleştirme
+</span></span><span class="line"><span class="cl">Switch(config)# interface gigabitEthernet 0/1
+</span></span><span class="line"><span class="cl">Switch(config-if)# spanning-tree guard root
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">! Loop Guard&#39;ı global olarak etkinleştirme
+</span></span><span class="line"><span class="cl">Switch(config)# spanning-tree loopguard default</span></span></code></pre></div></div>
+<hr>
+
+<h2 class="relative group">10. Modern Data Center&rsquo;da STP&rsquo;nin Yerini Ne Alıyor?
+    <div id="10-modern-data-centerda-stpnin-yerini-ne-alıyor" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#10-modern-data-centerda-stpnin-yerini-ne-al%c4%b1yor" aria-label="Anchor">#</a>
+    </span>
+    
+</h2>
+<p>Geleneksel üç katmanlı (access-distribution-core) kampüs ağlarında STP hâlâ standarttır. Ancak modern <strong>spine-leaf</strong> data center mimarilerinde STP&rsquo;nin doğası gereği yarattığı bir sorun var: aktif-pasif tasarımı gereği, yedekli linklerin bir kısmını sürekli Blocking durumunda tutar — bu da mevcut bant genişliğinin önemli bir kısmının kullanılamaması demektir.</p>
+<p>Bu nedenle büyük ölçekli data center&rsquo;lar STP&rsquo;yi büyük ölçüde devre dışı bırakan veya sınırlayan mimarilere yönelmiştir:</p>
+<ul>
+<li><strong>vPC (Virtual Port Channel) / MC-LAG:</strong> İki fiziksel switch&rsquo;i mantıksal olarak tek bir switch gibi göstererek, aralarındaki linklerin STP tarafından bloklanmasını önler; tüm linkler aktif-aktif çalışır.</li>
+<li><strong>VXLAN / EVPN:</strong> Katman 2 segmentleri, fiziksel topolojiden bağımsız olarak bir Katman 3 IP fabric üzerinden &ldquo;tünellenir&rdquo;. Bu sayede spine-leaf fabric&rsquo;in kendisi saf Katman 3 (ECMP ile tüm linkler aktif) olarak çalışır ve STP&rsquo;ye ihtiyaç fabric içinde ortadan kalkar; STP yalnızca en dış kenarda (edge) son kullanıcı bağlantılarının olduğu segmentlerde bir güvenlik ağı olarak kalmaya devam eder.</li>
+</ul>
+<hr>
+
+<h2 class="relative group">Sonuç
+    <div id="sonuç" class="anchor"></div>
+    
+    <span
+        class="absolute top-0 w-6 transition-opacity opacity-0 -start-6 not-prose group-hover:opacity-100 select-none">
+        <a class="text-primary-300 dark:text-neutral-700 !no-underline" href="#sonu%c3%a7" aria-label="Anchor">#</a>
+    </span>
+    
+</h2>
+<p>STP, Katman 2 ağların en temel ama en kritik güvenlik ve stabilite katmanlarından biridir. Root Bridge seçiminden Path Cost hesaplamasına, zamanlayıcılardan port koruma mekanizmalarına kadar her bileşen, &ldquo;hiçbir broadcast paketinin sonsuza kadar dönmemesi&rdquo; gibi tek bir amaca hizmet eder. RSTP ve MST bu temel mantığı korurken hızı ve ölçeklenebilirliği artırır; modern data center mimarileri ise STP&rsquo;yi ortadan kaldırmak yerine, onu yalnızca gerçekten gerekli olduğu yerde (kenar bağlantılarda) bırakıp merkezde tamamen Katman 3 tabanlı, aktif-aktif tasarımlara geçmeyi tercih eder.</p>
+
+          
+          
+          
+        </div>
+        
+        
+
+        
+
+        
+
+      </div>
+    </section>
+
+    
+    <footer class="pt-8 max-w-prose print:hidden">
+      
+  
+    
+    
+    
+    <div class="pt-8">
+      <hr class="border-dotted border-neutral-300 dark:border-neutral-600">
+      <div class="flex justify-between pt-3">
+        <span class="flex flex-col">
+          
+            <a
+              class="flex text-neutral-700 hover:text-primary-600 dark:text-neutral dark:hover:text-primary-400"
+              href="/tr/labnotes/l2-l3/">
+              <span class="leading-6">
+                <span class="inline-block rtl:rotate-180">&larr;</span>&ensp;Katman 2 vs. Katman 3 Anahtarlama: Ağ Segmentasyonu ve Paket Akışının Mühendislik Mantığı
+              </span>
+            </a>
+            
+              <span class="ms-6 mt-1 text-xs text-neutral-500 dark:text-neutral-400">
+                <time datetime="2026-08-05T00:00:00&#43;00:00">5 Ağustos 2026</time>
+              </span>
+            
+          
+        </span>
+        <span class="flex flex-col items-end">
+          
+        </span>
+      </div>
+    </div>
+  
+
+
+      
+    </footer>
+  </article>
+
+        
+
+
+  
+
+
+
+
+
+
+<div
+  id="scroll-to-top"
+  class="fixed bottom-6 end-6 z-50 transform translate-y-4 opacity-0 duration-200">
+  <a
+    href="#the-top"
+    class="pointer-events-auto flex h-12 w-12 items-center justify-center rounded-full bg-neutral/50 text-xl text-neutral-700 hover:text-primary-600 dark:bg-neutral-800/50 dark:text-neutral dark:hover:text-primary-400"
+    aria-label="Yukarı çık"
+    title="Yukarı çık">
+    &uarr;
+  </a>
+</div>
+
+      </main><footer id="site-footer" class="py-10 print:hidden">
+  
+  
+    
+  
+  <div class="flex items-center justify-between">
+    
+    
+      <p class="text-sm text-neutral-500 dark:text-neutral-400">
+          &copy;
+          2026
+          Algan Ayzit
+      </p>
+    
+
+    
+    
+      <p class="text-xs text-neutral-500 dark:text-neutral-400">
+        
+        
+        <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500"
+          href="https://gohugo.io/" target="_blank" rel="noopener noreferrer">Hugo</a> &amp; <a class="hover:underline hover:decoration-primary-400 hover:text-primary-500"
+          href="https://blowfish.page/" target="_blank" rel="noopener noreferrer">Blowfish</a> tarafından desteklenmektedir.
+      </p>
+    
+  </div>
+  
+    <script>
+      mediumZoom(document.querySelectorAll("img:not(.nozoom)"), {
+        margin: 24,
+        background: "rgba(0,0,0,0.5)",
+        scrollOffset: 0,
+      });
+    </script>
+  
+  
+  
+</footer>
+<div
+  id="search-wrapper"
+  class="invisible fixed inset-0 flex h-screen w-screen cursor-default flex-col bg-neutral-500/50 p-4 backdrop-blur-sm dark:bg-neutral-900/50 sm:p-6 md:p-[10vh] lg:p-[12vh] z-500"
+  data-url="http://localhost:1313/tr/">
+  <div
+    id="search-modal"
+    class="flex flex-col w-full max-w-3xl min-h-0 mx-auto border rounded-md shadow-lg top-20 border-neutral-200 bg-neutral dark:border-neutral-700 dark:bg-neutral-800">
+    <header class="relative z-10 flex items-center justify-between flex-none px-2">
+      <form class="flex items-center flex-auto min-w-0">
+        <div class="flex items-center justify-center w-8 h-8 text-neutral-400">
+          <span class="relative block icon"><svg aria-hidden="true" focusable="false" data-prefix="fas" data-icon="search" class="svg-inline--fa fa-search fa-w-16" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path fill="currentColor" d="M505 442.7L405.3 343c-4.5-4.5-10.6-7-17-7H372c27.6-35.3 44-79.7 44-128C416 93.1 322.9 0 208 0S0 93.1 0 208s93.1 208 208 208c48.3 0 92.7-16.4 128-44v16.3c0 6.4 2.5 12.5 7 17l99.7 99.7c9.4 9.4 24.6 9.4 33.9 0l28.3-28.3c9.4-9.4 9.4-24.6.1-34zM208 336c-70.7 0-128-57.2-128-128 0-70.7 57.2-128 128-128 70.7 0 128 57.2 128 128 0 70.7-57.2 128-128 128z"/></svg>
+</span>
+        </div>
+        <input
+          type="search"
+          id="search-query"
+          class="flex flex-auto h-12 mx-1 bg-transparent appearance-none focus:outline-dotted focus:outline-2 focus:outline-transparent"
+          placeholder="Ara"
+          tabindex="0">
+      </form>
+      <button
+        id="close-search-button"
+        class="flex items-center justify-center w-8 h-8 text-neutral-700 hover:text-primary-600 dark:text-neutral dark:hover:text-primary-400"
+        title="Kapat (Esc)">
+        <span class="relative block icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path fill="currentColor" d="M310.6 361.4c12.5 12.5 12.5 32.75 0 45.25C304.4 412.9 296.2 416 288 416s-16.38-3.125-22.62-9.375L160 301.3L54.63 406.6C48.38 412.9 40.19 416 32 416S15.63 412.9 9.375 406.6c-12.5-12.5-12.5-32.75 0-45.25l105.4-105.4L9.375 150.6c-12.5-12.5-12.5-32.75 0-45.25s32.75-12.5 45.25 0L160 210.8l105.4-105.4c12.5-12.5 32.75-12.5 45.25 0s12.5 32.75 0 45.25l-105.4 105.4L310.6 361.4z"/></svg>
+</span>
+      </button>
+    </header>
+    <section class="flex-auto px-2 overflow-auto">
+      <ul id="search-results">
+        
+      </ul>
+    </section>
+  </div>
+</div>
+
+    </div>
+  </body>
+  
+</html>

@@ -4,7 +4,7 @@
 
   <url>
     <loc>http://localhost:1313/de/</loc>
-    <lastmod>2026-08-05T00:00:00+00:00</lastmod>
+    <lastmod>2026-08-24T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -25,7 +25,7 @@
   </url>
   <url>
     <loc>http://localhost:1313/de/labnotes/</loc>
-    <lastmod>2026-08-05T00:00:00+00:00</lastmod>
+    <lastmod>2026-08-24T00:00:00+00:00</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.5</priority>
     <xhtml:link
@@ -42,6 +42,27 @@
       rel="alternate"
       hreflang="de"
       href="http://localhost:1313/de/labnotes/"
+    />
+  </url>
+  <url>
+    <loc>http://localhost:1313/de/labnotes/stp-loop-preventation/</loc>
+    <lastmod>2026-08-24T00:00:00+00:00</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.5</priority>
+    <xhtml:link
+      rel="alternate"
+      hreflang="en"
+      href="http://localhost:1313/labnotes/stp-loop-preventation/"
+    />
+    <xhtml:link
+      rel="alternate"
+      hreflang="tr"
+      href="http://localhost:1313/tr/labnotes/stp-loop-preventation/"
+    />
+    <xhtml:link
+      rel="alternate"
+      hreflang="de"
+      href="http://localhost:1313/de/labnotes/stp-loop-preventation/"
     />
   </url>
   <url>
